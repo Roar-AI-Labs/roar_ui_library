@@ -2,6 +2,8 @@
 
 Monorepo for the **Roar** design reference (`docs/`) and the publishable React library **`@roar-workspace/ui`**. Components use **Tailwind CSS v3**, **CSS variables (`--rs-*`)**, and optional peers (**Radix Dialog**, **Sonner**, **Recharts**).
 
+**Demo Preview:** [Design System](https://roar-ai-labs.github.io/roar_ui_library/) · [Dashboard](https://roar-ai-labs.github.io/roar_ui_library/dashboard.html) · [Charts](https://roar-ai-labs.github.io/roar_ui_library/charts.html)
+
 **Roadmap:** [ROADMAP.md](ROADMAP.md) · **Changelog (library):** [CHANGELOG.md](CHANGELOG.md) · **Versioning:** [VERSIONING.md](VERSIONING.md)
 
 ---
