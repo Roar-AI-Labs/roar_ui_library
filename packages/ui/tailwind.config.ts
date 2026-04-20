@@ -1,10 +1,9 @@
+import { createRequire } from 'node:module';
 import type { Config } from 'tailwindcss';
 
-/** Extend with Roar tokens in Phase 2 (map from docs/design-system.css). */
+const require = createRequire(import.meta.url);
+
 export default {
+  presets: [require('./tailwind-preset.cjs')],
   content: ['./src/**/*.{ts,tsx}'],
-  theme: {
-    extend: {},
-  },
-  plugins: [],
 } satisfies Config;

@@ -6,7 +6,11 @@
   ],
   "scripts": {
     "build": "npm run build -w @roar-workspace/ui",
-    "dev:ui": "npm run dev -w @roar-workspace/ui"
+    "build:playground": "npm run build -w @roar-workspace/playground",
+    "build:gallery": "npm run build -w @roar-workspace/gallery",
+    "dev:ui": "npm run dev -w @roar-workspace/ui",
+    "dev:playground": "npm run dev -w @roar-workspace/playground",
+    "dev:gallery": "npm run dev -w @roar-workspace/gallery"
   },
   "engines": {
     "node": ">=18"

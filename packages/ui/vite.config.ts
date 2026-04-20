@@ -19,13 +19,17 @@ export default defineConfig({
       fileName: 'index',
     },
     rollupOptions: {
-      external: [
-        'react',
-        'react-dom',
-        'react/jsx-runtime',
-        'clsx',
-        'tailwind-merge',
-      ],
+      external: (id) =>
+        [
+          'react',
+          'react-dom',
+          'react/jsx-runtime',
+          'clsx',
+          'tailwind-merge',
+          'class-variance-authority',
+          'sonner',
+          'recharts',
+        ].includes(id) || id.startsWith('@radix-ui/'),
     },
   },
 });

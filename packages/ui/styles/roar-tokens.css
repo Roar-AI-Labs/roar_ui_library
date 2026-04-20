@@ -1,0 +1,509 @@
+﻿/* Packaged token layer synced from docs/design-system.css (section 1: Design tokens through accent palette blocks, lines 7-475). Phase 3+ components rely on these --rs-* variables. Global reset/base from that file is not included. */
+/* ------------------------------------------------------------
+   1. DESIGN TOKENS (CSS Custom Properties)
+   ------------------------------------------------------------ */
+:root {
+  color-scheme: light;
+  /* -- ACCENT RAIL (default: neutral charcoal; no hue until you pick a palette) -- */
+  --rs-color-primary: #3d4149;
+  --rs-color-primary-hover: #30343c;
+  --rs-color-primary-pressed: #25282e;
+  --rs-color-primary-subdued: rgba(28, 29, 34, 0.07);
+  --rs-color-primary-subtle: rgba(28, 29, 34, 0.15);
+
+  /* -- ACCENT (aligned to primary; single brand hue) -- */
+  --rs-color-accent: var(--rs-color-primary);
+  --rs-color-accent-subtle: rgba(28, 29, 34, 0.1);
+
+  /* -- NEUTRAL SURFACES (cool gray base; unchanged by accent palette) -- */
+  --rs-color-bg: #eff1f4;
+  --rs-color-surface: #ffffff;
+  --rs-color-surface-hover: #f4f5f7;
+  --rs-color-surface-raised: #ffffff;
+
+  /* -- CONTENT / TEXT -- */
+  --rs-color-content: #1c1d22;
+  --rs-color-content-secondary: rgba(28, 29, 34, 0.78);
+  --rs-color-content-muted: rgba(28, 29, 34, 0.54);
+  --rs-color-content-placeholder: rgba(28, 29, 34, 0.32);
+  --rs-color-content-inverse: #ffffff;
+  --rs-color-content-on-primary: #ffffff;
+
+  /* -- BORDERS -- */
+  --rs-color-border: #e2e5ea;
+  --rs-color-border-strong: #cdd1d8;
+  --rs-color-border-focus: #5e6470;
+
+  /* -- SEMANTIC -- */
+  --rs-color-success: #31b56b;
+  --rs-color-success-light: rgba(49, 181, 107, 0.12);
+  --rs-color-success-dark: #1d8e51;
+
+  --rs-color-error: #e06179;
+  --rs-color-error-light: rgba(224, 97, 121, 0.12);
+  --rs-color-error-dark: #ba445d;
+
+  --rs-color-warning: #d89a32;
+  --rs-color-warning-light: rgba(216, 154, 50, 0.14);
+  --rs-color-warning-dark: #a97118;
+
+  /* Info = primary (avoid a second "informational" blue) */
+  --rs-color-info: var(--rs-color-primary);
+  --rs-color-info-light: var(--rs-color-primary-subdued);
+  --rs-color-info-dark: var(--rs-color-primary-pressed);
+
+  /* -- BADGE RARITY -- */
+  --rs-color-badge-common: #6d6f76;
+  --rs-color-badge-common-bg: #eceef1;
+  --rs-color-badge-rare: #4a4f5a;
+  --rs-color-badge-rare-bg: rgba(28, 29, 34, 0.08);
+  --rs-color-badge-epic: #4d5d7a;
+  --rs-color-badge-epic-bg: rgba(77, 93, 122, 0.12);
+  --rs-color-badge-legendary: #957b5c;
+  --rs-color-badge-legendary-bg: rgba(149, 123, 92, 0.12);
+
+  /* -- CATEGORY MARKERS (neutral steps; cat-1 follows accent / stays gray in neutral palette) -- */
+  --rs-color-cat-1: #4a4f5a;
+  --rs-color-cat-1-bg: rgba(28, 29, 34, 0.08);
+  --rs-color-cat-2: #555963;
+  --rs-color-cat-2-bg: rgba(28, 29, 34, 0.05);
+  --rs-color-cat-3: #656874;
+  --rs-color-cat-3-bg: rgba(28, 29, 34, 0.055);
+  --rs-color-cat-4: #757884;
+  --rs-color-cat-4-bg: rgba(28, 29, 34, 0.06);
+  --rs-color-cat-5: #858894;
+  --rs-color-cat-5-bg: rgba(28, 29, 34, 0.065);
+  --rs-color-cat-6: #9598a3;
+  --rs-color-cat-6-bg: rgba(28, 29, 34, 0.07);
+
+  /* -- AVATAR PLACEHOLDERS (neutral ramps; legible with content-on-primary text) -- */
+  --rs-color-avatar-neutral-a: #1c1d22;
+  --rs-color-avatar-neutral-b: #3d4452;
+  --rs-color-avatar-muted-a: #4a5160;
+  --rs-color-avatar-muted-b: #6c7382;
+
+  /* -- UPVOTE STATES -- */
+  --rs-color-upvote-default: rgba(28, 29, 34, 0.42);
+  --rs-color-upvote-hover: var(--rs-color-primary);
+  --rs-color-upvote-active: var(--rs-color-primary);
+  --rs-color-upvote-active-bg: rgba(28, 29, 34, 0.1);
+
+  /* -- TYPOGRAPHY -- */
+  --rs-font-family:
+    "Inter", ui-sans-serif, system-ui, -apple-system, sans-serif;
+  --rs-font-mono: "JetBrains Mono", ui-monospace, monospace;
+
+  --rs-text-xs: 0.75rem; /* 12px */
+  --rs-text-sm: 0.875rem; /* 14px */
+  --rs-text-base: 1rem; /* 16px */
+  --rs-text-lg: 1.125rem; /* 18px */
+  --rs-text-xl: 1.25rem; /* 20px */
+  --rs-text-2xl: 1.5rem; /* 24px */
+  --rs-text-3xl: 1.875rem; /* 30px */
+  --rs-text-4xl: 2.25rem; /* 36px */
+
+  --rs-font-regular: 400;
+  --rs-font-medium: 500;
+  --rs-font-semibold: 600;
+  --rs-font-bold: 700;
+
+  --rs-leading-tight: 1.25;
+  --rs-leading-snug: 1.375;
+  --rs-leading-normal: 1.5;
+  --rs-leading-relaxed: 1.625;
+
+  --rs-tracking-tight: -0.025em;
+  --rs-tracking-normal: -0.01em;
+  --rs-tracking-wide: 0.025em;
+
+  /* -- SPACING (4px base grid) -- */
+  --rs-space-0: 0;
+  --rs-space-0-5: 0.125rem; /* 2px */
+  --rs-space-1: 0.25rem; /* 4px */
+  --rs-space-1-5: 0.375rem; /* 6px */
+  --rs-space-2: 0.5rem; /* 8px */
+  --rs-space-2-5: 0.625rem; /* 10px */
+  --rs-space-3: 0.75rem; /* 12px */
+  --rs-space-4: 1rem; /* 16px */
+  --rs-space-5: 1.25rem; /* 20px */
+  --rs-space-6: 1.5rem; /* 24px */
+  --rs-space-8: 2rem; /* 32px */
+  --rs-space-10: 2.5rem; /* 40px */
+  --rs-space-12: 3rem; /* 48px */
+  --rs-space-16: 4rem; /* 64px */
+  --rs-space-20: 5rem; /* 80px */
+  --rs-space-24: 6rem; /* 96px */
+
+  /* -- BORDER RADIUS -- */
+  --rs-radius-sm: 4px;
+  --rs-radius-md: 6px;
+  --rs-radius: 8px;
+  --rs-radius-lg: 10px;
+  --rs-radius-xl: 14px;
+  --rs-radius-2xl: 18px;
+  --rs-radius-full: 9999px;
+
+  /* -- SHADOWS (soft product elevation) -- */
+  --rs-shadow-sm: 0 1px 2px rgba(18, 26, 42, 0.04);
+  --rs-shadow: 0 8px 24px rgba(18, 26, 42, 0.06), 0 1px 2px rgba(18, 26, 42, 0.05);
+  --rs-shadow-md: 0 14px 32px rgba(18, 26, 42, 0.08), 0 4px 10px rgba(18, 26, 42, 0.05);
+  --rs-shadow-lg: 0 18px 42px rgba(18, 26, 42, 0.1), 0 8px 16px rgba(18, 26, 42, 0.05);
+  --rs-shadow-xl: 0 26px 58px rgba(18, 26, 42, 0.14), 0 12px 24px rgba(18, 26, 42, 0.06);
+  --rs-shadow-card-hover: 0 18px 38px rgba(18, 26, 42, 0.08), 0 4px 12px rgba(18, 26, 42, 0.04);
+  --rs-shadow-focus: 0 0 0 3px rgba(28, 29, 34, 0.14);
+  --rs-shadow-glow: 0 0 0 rgba(0, 0, 0, 0);
+
+  /* Page backdrop: cool neutral wash (colored palettes may override the accent spot) */
+  --rs-bg-radial-accent: rgba(28, 29, 34, 0.04);
+
+  /* -- TRANSITIONS -- */
+  --rs-transition-fast: 100ms ease;
+  --rs-transition: 150ms ease;
+  --rs-transition-normal: 200ms ease;
+  --rs-transition-slow: 300ms ease;
+  --rs-transition-spring: 400ms cubic-bezier(0.34, 1.56, 0.64, 1);
+
+  /* -- Z-INDEX -- */
+  --rs-z-base: 0;
+  --rs-z-dropdown: 10;
+  --rs-z-sticky: 20;
+  --rs-z-header: 30;
+  --rs-z-overlay: 40;
+  --rs-z-modal: 50;
+  --rs-z-toast: 60;
+
+  /* -- LAYOUT -- */
+  --rs-container-max: 1200px;
+  --rs-sidebar-width: 260px;
+  --rs-header-height: 64px;
+  --rs-feed-max: 720px;
+
+  /* -- SHOWCASE SURFACES -- */
+  --rs-showcase-sidebar-bg: rgba(255, 255, 255, 0.84);
+  --rs-showcase-card-bg: rgba(255, 255, 255, 0.88);
+  --rs-showcase-card-bg-soft: rgba(255, 255, 255, 0.8);
+  --rs-showcase-card-bg-softer: rgba(244, 245, 247, 0.94);
+  --rs-showcase-hero-bg: linear-gradient(180deg, rgba(255, 255, 255, 0.94), rgba(239, 241, 244, 0.96));
+  --rs-showcase-hero-border: var(--rs-color-border-strong);
+}
+
+[data-theme="dark"] {
+  color-scheme: dark;
+
+  --rs-color-primary: #cacdd6;
+  --rs-color-primary-hover: #dddfe6;
+  --rs-color-primary-pressed: #b4b8c4;
+  --rs-color-primary-subdued: rgba(255, 255, 255, 0.11);
+  --rs-color-primary-subtle: rgba(255, 255, 255, 0.2);
+
+  --rs-color-accent: var(--rs-color-primary);
+  --rs-color-accent-subtle: rgba(255, 255, 255, 0.1);
+
+  --rs-color-bg: #131417;
+  --rs-color-surface: #1a1b20;
+  --rs-color-surface-hover: #21232a;
+  --rs-color-surface-raised: #202228;
+
+  --rs-color-content: #f5f5f2;
+  --rs-color-content-secondary: rgba(245, 245, 242, 0.8);
+  --rs-color-content-muted: rgba(245, 245, 242, 0.56);
+  --rs-color-content-placeholder: rgba(245, 245, 242, 0.32);
+  --rs-color-content-inverse: #131417;
+  /* Neutral dark primary is a light gray; labels on primary must stay inverse of surface text */
+  --rs-color-content-on-primary: var(--rs-color-content-inverse);
+
+  --rs-color-border: rgba(255, 255, 255, 0.1);
+  --rs-color-border-strong: rgba(255, 255, 255, 0.18);
+  --rs-color-border-focus: #9ea3b0;
+
+  --rs-color-success-light: rgba(49, 181, 107, 0.18);
+  --rs-color-success-dark: #6dd89b;
+  --rs-color-error-light: rgba(224, 97, 121, 0.18);
+  --rs-color-error-dark: #f095a6;
+  --rs-color-warning-light: rgba(216, 154, 50, 0.18);
+  --rs-color-warning-dark: #edc16c;
+  --rs-color-badge-common: rgba(245, 245, 242, 0.62);
+  --rs-color-badge-common-bg: rgba(255, 255, 255, 0.06);
+  --rs-color-badge-rare-bg: rgba(255, 255, 255, 0.12);
+  --rs-color-badge-rare: #bcc0cc;
+  --rs-color-badge-epic: #9dadc4;
+  --rs-color-badge-epic-bg: rgba(157, 173, 196, 0.16);
+  --rs-color-badge-legendary: #c4a882;
+  --rs-color-badge-legendary-bg: rgba(196, 168, 130, 0.14);
+
+  --rs-color-cat-1: #cacdd6;
+  --rs-color-cat-1-bg: rgba(255, 255, 255, 0.12);
+  --rs-color-cat-2: rgba(245, 245, 242, 0.52);
+  --rs-color-cat-2-bg: rgba(255, 255, 255, 0.06);
+  --rs-color-cat-3: rgba(245, 245, 242, 0.48);
+  --rs-color-cat-3-bg: rgba(255, 255, 255, 0.07);
+  --rs-color-cat-4: rgba(245, 245, 242, 0.44);
+  --rs-color-cat-4-bg: rgba(255, 255, 255, 0.08);
+  --rs-color-cat-5: rgba(245, 245, 242, 0.4);
+  --rs-color-cat-5-bg: rgba(255, 255, 255, 0.09);
+  --rs-color-cat-6: rgba(245, 245, 242, 0.36);
+  --rs-color-cat-6-bg: rgba(255, 255, 255, 0.1);
+
+  --rs-color-avatar-neutral-a: #252730;
+  --rs-color-avatar-neutral-b: #3a3e4a;
+  --rs-color-avatar-muted-a: #343842;
+  --rs-color-avatar-muted-b: #4e5460;
+
+  --rs-color-upvote-default: rgba(245, 245, 242, 0.46);
+  --rs-color-upvote-hover: var(--rs-color-primary);
+  --rs-color-upvote-active: var(--rs-color-primary);
+  --rs-color-upvote-active-bg: rgba(255, 255, 255, 0.14);
+
+  --rs-shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.28);
+  --rs-shadow: 0 10px 24px rgba(0, 0, 0, 0.24), 0 2px 6px rgba(0, 0, 0, 0.18);
+  --rs-shadow-md: 0 18px 36px rgba(0, 0, 0, 0.28), 0 6px 14px rgba(0, 0, 0, 0.18);
+  --rs-shadow-lg: 0 24px 48px rgba(0, 0, 0, 0.32), 0 8px 18px rgba(0, 0, 0, 0.18);
+  --rs-shadow-xl: 0 30px 62px rgba(0, 0, 0, 0.4), 0 14px 28px rgba(0, 0, 0, 0.22);
+  --rs-shadow-card-hover: 0 22px 42px rgba(0, 0, 0, 0.28), 0 8px 14px rgba(0, 0, 0, 0.16);
+  --rs-shadow-focus: 0 0 0 3px rgba(255, 255, 255, 0.16);
+
+  --rs-bg-radial-accent: rgba(255, 255, 255, 0.05);
+
+  --rs-showcase-sidebar-bg: rgba(26, 27, 32, 0.88);
+  --rs-showcase-card-bg: rgba(26, 27, 32, 0.9);
+  --rs-showcase-card-bg-soft: rgba(30, 32, 39, 0.88);
+  --rs-showcase-card-bg-softer: rgba(33, 35, 42, 0.9);
+  --rs-showcase-hero-bg: linear-gradient(180deg, rgba(32,34,40,0.98), rgba(26,27,32,0.94));
+  --rs-showcase-hero-border: var(--rs-color-border);
+}
+
+/* Slate (blue); optional accent layered on the neutral foundation */
+html[data-palette="slate"]:not([data-theme="dark"]) {
+  --rs-color-primary: #3563e9;
+  --rs-color-primary-hover: #2855dc;
+  --rs-color-primary-pressed: #2148be;
+  --rs-color-primary-subdued: rgba(53, 99, 233, 0.1);
+  --rs-color-primary-subtle: rgba(53, 99, 233, 0.18);
+  --rs-color-accent: #3563e9;
+  --rs-color-accent-subtle: rgba(53, 99, 233, 0.12);
+  --rs-color-border-focus: #3563e9;
+  --rs-color-badge-rare: #3563e9;
+  --rs-color-badge-rare-bg: rgba(53, 99, 233, 0.11);
+  --rs-color-cat-1: #3563e9;
+  --rs-color-cat-1-bg: rgba(53, 99, 233, 0.1);
+  --rs-color-upvote-hover: #3563e9;
+  --rs-color-upvote-active: #3563e9;
+  --rs-color-upvote-active-bg: rgba(53, 99, 233, 0.12);
+  --rs-shadow-focus: 0 0 0 3px rgba(53, 99, 233, 0.16);
+  --rs-bg-radial-accent: rgba(53, 99, 233, 0.055);
+}
+
+html[data-theme="dark"][data-palette="slate"] {
+  --rs-color-primary: #7ea2ff;
+  --rs-color-primary-hover: #92b2ff;
+  --rs-color-primary-pressed: #6b93f6;
+  --rs-color-primary-subdued: rgba(126, 162, 255, 0.16);
+  --rs-color-primary-subtle: rgba(126, 162, 255, 0.28);
+  --rs-color-accent: #7ea2ff;
+  --rs-color-accent-subtle: rgba(126, 162, 255, 0.16);
+  --rs-color-border-focus: #7ea2ff;
+  --rs-color-badge-rare: #a8beff;
+  --rs-color-badge-rare-bg: rgba(126, 162, 255, 0.16);
+  --rs-color-cat-1: #7ea2ff;
+  --rs-color-cat-1-bg: rgba(126, 162, 255, 0.14);
+  --rs-color-upvote-hover: #7ea2ff;
+  --rs-color-upvote-active: #7ea2ff;
+  --rs-color-upvote-active-bg: rgba(126, 162, 255, 0.16);
+  --rs-shadow-focus: 0 0 0 3px rgba(126, 162, 255, 0.24);
+  --rs-bg-radial-accent: rgba(126, 162, 255, 0.09);
+}
+
+/* --------------------------------------------------------------------------
+   Accent palettes (light); surfaces stay neutral; only brand rails swap.
+   Default :root + [data-theme="dark"] = neutral grays; slate restores blue.
+   -------------------------------------------------------------------------- */
+html[data-palette="teal"]:not([data-theme="dark"]) {
+  --rs-color-primary: #0d9488;
+  --rs-color-primary-hover: #0f766e;
+  --rs-color-primary-pressed: #115e59;
+  --rs-color-primary-subdued: rgba(13, 148, 136, 0.1);
+  --rs-color-primary-subtle: rgba(13, 148, 136, 0.18);
+  --rs-color-accent: #0d9488;
+  --rs-color-accent-subtle: rgba(13, 148, 136, 0.12);
+  --rs-color-border-focus: #0d9488;
+  --rs-color-badge-rare: #0d9488;
+  --rs-color-badge-rare-bg: rgba(13, 148, 136, 0.11);
+  --rs-color-cat-1: #0d9488;
+  --rs-color-cat-1-bg: rgba(13, 148, 136, 0.1);
+  --rs-color-upvote-hover: #0d9488;
+  --rs-color-upvote-active: #0d9488;
+  --rs-color-upvote-active-bg: rgba(13, 148, 136, 0.12);
+  --rs-shadow-focus: 0 0 0 3px rgba(13, 148, 136, 0.16);
+}
+
+html[data-palette="violet"]:not([data-theme="dark"]) {
+  --rs-color-primary: #7c3aed;
+  --rs-color-primary-hover: #6d28d9;
+  --rs-color-primary-pressed: #5b21b6;
+  --rs-color-primary-subdued: rgba(124, 58, 237, 0.1);
+  --rs-color-primary-subtle: rgba(124, 58, 237, 0.18);
+  --rs-color-accent: #7c3aed;
+  --rs-color-accent-subtle: rgba(124, 58, 237, 0.12);
+  --rs-color-border-focus: #7c3aed;
+  --rs-color-badge-rare: #7c3aed;
+  --rs-color-badge-rare-bg: rgba(124, 58, 237, 0.11);
+  --rs-color-cat-1: #7c3aed;
+  --rs-color-cat-1-bg: rgba(124, 58, 237, 0.1);
+  --rs-color-upvote-hover: #7c3aed;
+  --rs-color-upvote-active: #7c3aed;
+  --rs-color-upvote-active-bg: rgba(124, 58, 237, 0.12);
+  --rs-shadow-focus: 0 0 0 3px rgba(124, 58, 237, 0.16);
+}
+
+html[data-palette="amber"]:not([data-theme="dark"]) {
+  --rs-color-primary: #d97706;
+  --rs-color-primary-hover: #b45309;
+  --rs-color-primary-pressed: #92400e;
+  --rs-color-primary-subdued: rgba(217, 119, 6, 0.1);
+  --rs-color-primary-subtle: rgba(217, 119, 6, 0.18);
+  --rs-color-accent: #d97706;
+  --rs-color-accent-subtle: rgba(217, 119, 6, 0.12);
+  --rs-color-border-focus: #d97706;
+  --rs-color-badge-rare: #d97706;
+  --rs-color-badge-rare-bg: rgba(217, 119, 6, 0.11);
+  --rs-color-cat-1: #d97706;
+  --rs-color-cat-1-bg: rgba(217, 119, 6, 0.1);
+  --rs-color-upvote-hover: #d97706;
+  --rs-color-upvote-active: #d97706;
+  --rs-color-upvote-active-bg: rgba(217, 119, 6, 0.12);
+  --rs-shadow-focus: 0 0 0 3px rgba(217, 119, 6, 0.16);
+}
+
+html[data-palette="rose"]:not([data-theme="dark"]) {
+  --rs-color-primary: #e11d48;
+  --rs-color-primary-hover: #be123c;
+  --rs-color-primary-pressed: #9f1239;
+  --rs-color-primary-subdued: rgba(225, 29, 72, 0.1);
+  --rs-color-primary-subtle: rgba(225, 29, 72, 0.18);
+  --rs-color-accent: #e11d48;
+  --rs-color-accent-subtle: rgba(225, 29, 72, 0.12);
+  --rs-color-border-focus: #e11d48;
+  --rs-color-badge-rare: #e11d48;
+  --rs-color-badge-rare-bg: rgba(225, 29, 72, 0.11);
+  --rs-color-cat-1: #e11d48;
+  --rs-color-cat-1-bg: rgba(225, 29, 72, 0.1);
+  --rs-color-upvote-hover: #e11d48;
+  --rs-color-upvote-active: #e11d48;
+  --rs-color-upvote-active-bg: rgba(225, 29, 72, 0.12);
+  --rs-shadow-focus: 0 0 0 3px rgba(225, 29, 72, 0.16);
+}
+
+html[data-theme="dark"][data-palette="teal"] {
+  --rs-color-primary: #2dd4bf;
+  --rs-color-primary-hover: #5eead4;
+  --rs-color-primary-pressed: #14b8a6;
+  --rs-color-primary-subdued: rgba(45, 212, 191, 0.16);
+  --rs-color-primary-subtle: rgba(45, 212, 191, 0.28);
+  --rs-color-accent: #2dd4bf;
+  --rs-color-accent-subtle: rgba(45, 212, 191, 0.16);
+  --rs-color-border-focus: #2dd4bf;
+  --rs-color-badge-rare: #5eead4;
+  --rs-color-badge-rare-bg: rgba(45, 212, 191, 0.16);
+  --rs-color-cat-1: #2dd4bf;
+  --rs-color-cat-1-bg: rgba(45, 212, 191, 0.14);
+  --rs-color-upvote-hover: #2dd4bf;
+  --rs-color-upvote-active: #2dd4bf;
+  --rs-color-upvote-active-bg: rgba(45, 212, 191, 0.16);
+  --rs-shadow-focus: 0 0 0 3px rgba(45, 212, 191, 0.24);
+}
+
+html[data-theme="dark"][data-palette="violet"] {
+  --rs-color-primary: #a78bfa;
+  --rs-color-primary-hover: #c4b5fd;
+  --rs-color-primary-pressed: #8b5cf6;
+  --rs-color-primary-subdued: rgba(167, 139, 250, 0.16);
+  --rs-color-primary-subtle: rgba(167, 139, 250, 0.28);
+  --rs-color-accent: #a78bfa;
+  --rs-color-accent-subtle: rgba(167, 139, 250, 0.16);
+  --rs-color-border-focus: #a78bfa;
+  --rs-color-badge-rare: #c4b5fd;
+  --rs-color-badge-rare-bg: rgba(167, 139, 250, 0.16);
+  --rs-color-cat-1: #a78bfa;
+  --rs-color-cat-1-bg: rgba(167, 139, 250, 0.14);
+  --rs-color-upvote-hover: #a78bfa;
+  --rs-color-upvote-active: #a78bfa;
+  --rs-color-upvote-active-bg: rgba(167, 139, 250, 0.16);
+  --rs-shadow-focus: 0 0 0 3px rgba(167, 139, 250, 0.24);
+}
+
+html[data-theme="dark"][data-palette="amber"] {
+  --rs-color-primary: #fbbf24;
+  --rs-color-primary-hover: #fcd34d;
+  --rs-color-primary-pressed: #f59e0b;
+  --rs-color-primary-subdued: rgba(251, 191, 36, 0.16);
+  --rs-color-primary-subtle: rgba(251, 191, 36, 0.28);
+  --rs-color-accent: #fbbf24;
+  --rs-color-accent-subtle: rgba(251, 191, 36, 0.16);
+  --rs-color-border-focus: #fbbf24;
+  --rs-color-badge-rare: #fcd34d;
+  --rs-color-badge-rare-bg: rgba(251, 191, 36, 0.16);
+  --rs-color-cat-1: #fbbf24;
+  --rs-color-cat-1-bg: rgba(251, 191, 36, 0.14);
+  --rs-color-upvote-hover: #fbbf24;
+  --rs-color-upvote-active: #fbbf24;
+  --rs-color-upvote-active-bg: rgba(251, 191, 36, 0.16);
+  --rs-shadow-focus: 0 0 0 3px rgba(251, 191, 36, 0.24);
+}
+
+html[data-theme="dark"][data-palette="rose"] {
+  --rs-color-primary: #fb7185;
+  --rs-color-primary-hover: #fda4af;
+  --rs-color-primary-pressed: #f43f5e;
+  --rs-color-primary-subdued: rgba(251, 113, 133, 0.16);
+  --rs-color-primary-subtle: rgba(251, 113, 133, 0.28);
+  --rs-color-accent: #fb7185;
+  --rs-color-accent-subtle: rgba(251, 113, 133, 0.16);
+  --rs-color-border-focus: #fb7185;
+  --rs-color-badge-rare: #fda4af;
+  --rs-color-badge-rare-bg: rgba(251, 113, 133, 0.16);
+  --rs-color-cat-1: #fb7185;
+  --rs-color-cat-1-bg: rgba(251, 113, 133, 0.14);
+  --rs-color-upvote-hover: #fb7185;
+  --rs-color-upvote-active: #fb7185;
+  --rs-color-upvote-active-bg: rgba(251, 113, 133, 0.16);
+  --rs-shadow-focus: 0 0 0 3px rgba(251, 113, 133, 0.24);
+}
+
+@keyframes rs-spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Badge legendary shimmer (see .rs-badge--legendary in docs/design-system.css) */
+@keyframes rs-shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 200%;
+  }
+}
+
+/* Radix Dialog content (packages/ui dialog) */
+@keyframes rs-dialog-in {
+  from {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.98);
+  }
+  to {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+}
+
+@keyframes rs-dialog-out {
+  from {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  to {
+    opacity: 0;
+    transform: translate(-50%, -48%) scale(0.98);
+  }
+}

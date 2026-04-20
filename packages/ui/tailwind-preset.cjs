@@ -1,0 +1,67 @@
+/** @type {import('tailwindcss').Config} */
+module.exports = {
+  theme: {
+    extend: {
+      colors: {
+        'rs-primary': 'var(--rs-color-primary)',
+        'rs-primary-hover': 'var(--rs-color-primary-hover)',
+        'rs-primary-pressed': 'var(--rs-color-primary-pressed)',
+        'rs-on-primary': 'var(--rs-color-content-on-primary)',
+        'rs-bg': 'var(--rs-color-bg)',
+        'rs-surface': 'var(--rs-color-surface)',
+        'rs-surface-hover': 'var(--rs-color-surface-hover)',
+        'rs-content': 'var(--rs-color-content)',
+        'rs-content-secondary': 'var(--rs-color-content-secondary)',
+        'rs-content-muted': 'var(--rs-color-content-muted)',
+        'rs-border': 'var(--rs-color-border)',
+        'rs-border-strong': 'var(--rs-color-border-strong)',
+        'rs-border-focus': 'var(--rs-color-border-focus)',
+        'rs-error': 'var(--rs-color-error)',
+        'rs-error-dark': 'var(--rs-color-error-dark)',
+        'rs-success': 'var(--rs-color-success)',
+        'rs-warning': 'var(--rs-color-warning)',
+      },
+      fontFamily: {
+        rs: [
+          'var(--rs-font-family)',
+          'ui-sans-serif',
+          'system-ui',
+          'sans-serif',
+        ],
+      },
+      fontSize: {
+        'rs-xs': 'var(--rs-text-xs)',
+        'rs-sm': 'var(--rs-text-sm)',
+        'rs-base': 'var(--rs-text-base)',
+        'rs-lg': 'var(--rs-text-lg)',
+        'rs-xl': 'var(--rs-text-xl)',
+        'rs-2xl': 'var(--rs-text-2xl)',
+      },
+      borderRadius: {
+        rs: 'var(--rs-radius)',
+        'rs-sm': 'var(--rs-radius-sm)',
+        'rs-md': 'var(--rs-radius-md)',
+        'rs-lg': 'var(--rs-radius-lg)',
+        'rs-xl': 'var(--rs-radius-xl)',
+        'rs-full': 'var(--rs-radius-full)',
+      },
+      spacing: {
+        'rs-0': 'var(--rs-space-0)',
+        'rs-1': 'var(--rs-space-1)',
+        'rs-2': 'var(--rs-space-2)',
+        'rs-3': 'var(--rs-space-3)',
+        'rs-4': 'var(--rs-space-4)',
+        'rs-5': 'var(--rs-space-5)',
+        'rs-6': 'var(--rs-space-6)',
+        'rs-8': 'var(--rs-space-8)',
+        'rs-10': 'var(--rs-space-10)',
+        'rs-12': 'var(--rs-space-12)',
+      },
+      boxShadow: {
+        'rs-focus': 'var(--rs-shadow-focus)',
+        'rs-sm': 'var(--rs-shadow-sm)',
+        rs: 'var(--rs-shadow)',
+      },
+    },
+  },
+};
