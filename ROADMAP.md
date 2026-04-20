@@ -6,10 +6,11 @@ This repo holds the **static design reference** (`docs/`) and the **React UI pac
 
 ## Phase 0 — Repository shape (done)
 
-- Monorepo layout: `docs/` for HTML/CSS/JS reference, `packages/ui/` for the npm-targeted library.
-- Move showcase pages and assets into `docs/` (`index.html`, `dashboard.html`, `charts.html`, shared CSS/JS).
-- Root `package.json` workspaces + `npm run build` wired to `@roar-workspace/ui`.
-- UI package scaffold: Vite ESM build, declaration emit, `cn()` + `ROAR_UI_VERSION` exports (see `packages/ui/`).
+- [x] Monorepo layout: `docs/` for HTML/CSS/JS reference, `packages/ui/` for the npm-targeted library.
+- [x] Move showcase pages and assets into `docs/` (`index.html`, `dashboard.html`, `charts.html`, shared CSS/JS).
+- [x] Root `package.json` workspaces + `npm run build` wired to `@roar-workspace/ui`.
+- [x] UI package scaffold: Vite ESM build, declaration emit, `cn()` + `ROAR_UI_VERSION` exports (see `packages/ui/`).
+- [x] Root `README.md`, `.gitignore` covers `dist/` + `node_modules/`, initial commit records Phase 0 tree.
 
 **How to view docs locally:** open `docs/index.html` in a browser, or from repo root run  
 `npx --yes serve docs` and visit the printed URL (static server avoids `file://` quirks for some scripts).
