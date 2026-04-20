@@ -1,0 +1,6 @@
+/**
+ * Import this from apps that consume @roar-workspace/ui once Tailwind preset/tokens land (Phase 2).
+ * @tailwind base;
+ * @tailwind components;
+ * @tailwind utilities;
+ */

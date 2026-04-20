@@ -1,0 +1,14 @@
+{
+  "name": "roar-workspace-ui-monorepo",
+  "private": true,
+  "workspaces": [
+    "packages/*"
+  ],
+  "scripts": {
+    "build": "npm run build -w @roar-workspace/ui",
+    "dev:ui": "npm run dev -w @roar-workspace/ui"
+  },
+  "engines": {
+    "node": ">=18"
+  }
+}

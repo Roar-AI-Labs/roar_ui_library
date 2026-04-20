@@ -1,0 +1,2283 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Roar Workspace - Design System</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <script>
+    (() => {
+      try {
+        const savedTheme = localStorage.getItem('rs-theme');
+        if (savedTheme) {
+          document.documentElement.setAttribute('data-theme', savedTheme);
+        }
+        const pal = localStorage.getItem('rs-palette');
+        if (pal && ['neutral', 'slate', 'teal', 'violet', 'amber', 'rose'].includes(pal)) {
+          document.documentElement.setAttribute('data-palette', pal);
+        } else {
+          document.documentElement.setAttribute('data-palette', 'neutral');
+        }
+      } catch (error) {
+        console.warn('Theme or palette preference could not be restored.', error);
+        document.documentElement.setAttribute('data-palette', 'neutral');
+      }
+    })();
+  </script>
+  <link rel="stylesheet" href="design-system.css">
+  <script src="https://unpkg.com/lucide@latest"></script>
+  <style>
+    /* page-specific overrides for the showcase only */
+    .ds-mockup-header { position: relative; top: auto; z-index: 1; border-radius: var(--rs-radius-lg) var(--rs-radius-lg) 0 0; }
+    .ds-mockup-body { display: flex; gap: var(--rs-space-6); padding: var(--rs-space-6); background: var(--rs-color-bg); border: 1px solid var(--rs-color-border); border-top: none; border-radius: 0 0 var(--rs-radius-lg) var(--rs-radius-lg); }
+    .ds-grid-2 { display: grid; grid-template-columns: 1fr 1fr; gap: var(--rs-space-4); }
+    .ds-grid-3 { display: grid; grid-template-columns: repeat(3, 1fr); gap: var(--rs-space-4); }
+    .ds-grid-4 { display: grid; grid-template-columns: repeat(4, 1fr); gap: var(--rs-space-4); }
+    @media (max-width: 768px) {
+      .ds-grid-2, .ds-grid-3, .ds-grid-4 { grid-template-columns: 1fr; }
+    }
+  </style>
+</head>
+<body>
+  <!-- ============================================================
+       SIDEBAR NAVIGATION
+       ============================================================ -->
+  <div class="ds-layout">
+    <nav class="ds-sidebar" id="ds-sidebar">
+      <div class="ds-sidebar__logo">Roar <span>Workspace</span></div>
+
+      <div class="ds-sidebar__group-title">Foundation</div>
+      <a href="#appearance" class="ds-sidebar__link ds-sidebar__link--active">Appearance</a>
+      <a href="#colors" class="ds-sidebar__link">Colors</a>
+      <a href="#typography" class="ds-sidebar__link">Typography</a>
+      <a href="#spacing" class="ds-sidebar__link">Spacing</a>
+      <a href="#radius-shadows" class="ds-sidebar__link">Radius & Shadows</a>
+
+      <div class="ds-sidebar__group-title">Components</div>
+      <a href="#buttons" class="ds-sidebar__link">Buttons</a>
+      <a href="#navigation" class="ds-sidebar__link">Navigation</a>
+      <a href="#search" class="ds-sidebar__link">Search Bar</a>
+      <a href="#avatars" class="ds-sidebar__link">Avatars</a>
+      <a href="#post-cards" class="ds-sidebar__link">Post Cards</a>
+      <a href="#upvote" class="ds-sidebar__link">Upvote Button</a>
+      <a href="#tags" class="ds-sidebar__link">Tags & Pills</a>
+      <a href="#feed" class="ds-sidebar__link">Feed Layout</a>
+      <a href="#comments" class="ds-sidebar__link">Comments</a>
+      <a href="#badges" class="ds-sidebar__link">Badges</a>
+      <a href="#leaderboard" class="ds-sidebar__link">Leaderboard</a>
+      <a href="#profile" class="ds-sidebar__link">Profile Card</a>
+      <a href="#courses" class="ds-sidebar__link">Course Cards</a>
+      <a href="#progress" class="ds-sidebar__link">Progress Bars</a>
+      <a href="#stats" class="ds-sidebar__link">Stats Cards</a>
+      <a href="#tables" class="ds-sidebar__link">Tables</a>
+      <a href="charts.html" class="ds-sidebar__link">Charts</a>
+      <a href="#streak-points" class="ds-sidebar__link">Streak & Points</a>
+      <a href="#forms" class="ds-sidebar__link">Form Elements</a>
+      <a href="#dropdown" class="ds-sidebar__link">Custom dropdown</a>
+      <a href="#multiselect" class="ds-sidebar__link">Multi-select</a>
+      <a href="#toasts" class="ds-sidebar__link">Toasts</a>
+      <a href="#modal" class="ds-sidebar__link">Modals &amp; overlays</a>
+      <a href="#empty" class="ds-sidebar__link">Empty State</a>
+      <a href="#skeletons" class="ds-sidebar__link">Skeletons</a>
+
+      <div class="ds-sidebar__group-title">Page Mockups</div>
+      <a href="#mockup-feed" class="ds-sidebar__link">Feed Page</a>
+      <a href="#mockup-leaderboard" class="ds-sidebar__link">Leaderboard Page</a>
+      <a href="dashboard.html" class="ds-sidebar__link">Dashboard Prototype</a>
+    </nav>
+
+    <!-- ============================================================
+         MAIN CONTENT
+         ============================================================ -->
+    <main class="ds-main">
+
+      <div class="ds-page-intro" id="appearance">
+        <div class="ds-page-intro__copy">
+          <h1 style="font-size: var(--rs-text-4xl); margin-bottom: var(--rs-space-2); font-weight: 300; letter-spacing: -0.025em;">Roar Workspace</h1>
+          <p style="font-size: var(--rs-text-lg); color: var(--rs-color-content-muted); font-weight: 300;">Design System &middot; Calm Product Edition</p>
+          <p style="font-size: var(--rs-text-sm); color: var(--rs-color-content-muted); margin-top: var(--rs-space-2); max-width: 52ch;">
+            The UI starts in <strong>Neutral</strong> — white, charcoal, and gray only. Add an <strong>accent palette</strong> when you want color on actions, focus, links, and charts; then toggle light or dark. Your choices persist on this device.
+          </p>
+        </div>
+        <div class="ds-page-intro__actions rs-appearance-actions">
+          <div class="rs-palette-picker" role="group" aria-labelledby="palette-label-main">
+            <span id="palette-label-main" class="rs-palette-picker__label">Accent palette</span>
+            <div class="rs-palette-picker__row">
+              <button type="button" class="rs-palette-picker__option" data-set-palette="neutral" style="background:linear-gradient(135deg,#1c1d22 0%,#6b7280 100%)" title="Neutral (grayscale)" aria-label="Neutral grayscale accent"></button>
+              <button type="button" class="rs-palette-picker__option" data-set-palette="slate" style="background:#3563e9" title="Slate blue" aria-label="Slate blue accent"></button>
+              <button type="button" class="rs-palette-picker__option" data-set-palette="teal" style="background:#0d9488" title="Teal" aria-label="Teal accent"></button>
+              <button type="button" class="rs-palette-picker__option" data-set-palette="violet" style="background:#7c3aed" title="Violet" aria-label="Violet accent"></button>
+              <button type="button" class="rs-palette-picker__option" data-set-palette="amber" style="background:#d97706" title="Amber" aria-label="Amber accent"></button>
+              <button type="button" class="rs-palette-picker__option" data-set-palette="rose" style="background:#e11d48" title="Rose" aria-label="Rose accent"></button>
+            </div>
+            <p class="rs-palette-picker__hint">Try switching palette then scroll to <a href="#colors" style="color:var(--rs-color-primary);">Colors</a> — primary swatches update live.</p>
+          </div>
+          <div class="rs-palette-picker" role="group" aria-labelledby="theme-label-main">
+            <span id="theme-label-main" class="rs-palette-picker__label">Mode</span>
+            <div class="rs-theme-toggle" role="group" aria-label="Color theme">
+              <button class="rs-theme-toggle__button" type="button" data-set-theme="dark" aria-pressed="false">
+                <i data-lucide="moon-star"></i>
+                Dark
+              </button>
+              <button class="rs-theme-toggle__button" type="button" data-set-theme="light" aria-pressed="false">
+                <i data-lucide="sun-medium"></i>
+                Light
+              </button>
+            </div>
+          </div>
+          <div class="rs-palette-picker" style="justify-content:flex-end;">
+            <span class="rs-palette-picker__label">&nbsp;</span>
+            <a href="dashboard.html" class="rs-btn rs-btn--md rs-btn--secondary">
+              <i data-lucide="layout-dashboard" style="width:16px;height:16px;"></i>
+              Open Dashboard Prototype
+            </a>
+          </div>
+        </div>
+      </div>
+
+      <div class="ds-demo" style="margin-bottom: var(--rs-space-8); background: var(--rs-showcase-hero-bg); border-color: var(--rs-showcase-hero-border); box-shadow: var(--rs-shadow);">
+        <div class="ds-demo__label" style="color: var(--rs-color-primary);">Brand Direction</div>
+        <p style="font-size: var(--rs-text-base); color: var(--rs-color-content); margin-bottom: var(--rs-space-4); max-width: 60ch; font-weight: 300; line-height: 1.7;">
+          Calm workspace UI: cool neutral surfaces, a swappable accent for actions and information, and category steps 2–6 as grayscale. Gamified tiers stay soft so the default tone stays business-ready.
+        </p>
+        <div class="ds-demo__row">
+          <button class="rs-btn rs-btn--md rs-btn--primary">Primary action</button>
+          <button class="rs-btn rs-btn--md rs-btn--secondary">Secondary action</button>
+          <span class="rs-tag rs-tag--primary">Calm accent</span>
+        </div>
+      </div>
+
+      <!-- ========================================
+           COLORS
+           ======================================== -->
+      <section class="ds-section" id="colors">
+        <h2 class="ds-section__title">Colors</h2>
+        <p class="ds-section__desc" style="margin-top:calc(-1 * var(--rs-space-2));">
+          Foundation is <strong>neutral</strong> (surfaces, borders, body text). The <strong>accent ramp</strong> comes from the palette you choose under <a href="#appearance" style="color:var(--rs-color-primary);">Appearance</a> — default is grayscale <strong>Neutral</strong>; add Slate (blue), Teal, Violet, Amber, or Rose when you want hue, in light or dark mode.
+        </p>
+
+        <h3 class="ds-section__subtitle">Primary accent · follows palette</h3>
+        <p class="ds-section__desc" style="margin-bottom: var(--rs-space-4);">These tokens update when you change <strong>Accent palette</strong> under Appearance. Actions, links, focus, and informational callouts share this ramp (no separate “info” hue).</p>
+        <div class="ds-swatch-grid">
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-primary)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Primary</div><div class="ds-swatch__hex">--rs-color-primary</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-primary-hover)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Primary Hover</div><div class="ds-swatch__hex">--rs-color-primary-hover</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-primary-pressed)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Primary Pressed</div><div class="ds-swatch__hex">--rs-color-primary-pressed</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-primary-subdued)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Primary Subdued</div><div class="ds-swatch__hex">--rs-color-primary-subdued</div></div></div>
+        </div>
+
+        <h3 class="ds-section__subtitle">Surface neutrals · same for every palette</h3>
+        <p class="ds-section__desc" style="margin-bottom: var(--rs-space-4);">Cool gray canvas in light mode; elevated surfaces in dark mode. Accent choice does not change these.</p>
+        <div class="ds-swatch-grid">
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-bg)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Background</div><div class="ds-swatch__hex">--rs-color-bg</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-surface)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Surface</div><div class="ds-swatch__hex">--rs-color-surface</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-surface-hover)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Surface Hover</div><div class="ds-swatch__hex">--rs-color-surface-hover</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-border)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Border</div><div class="ds-swatch__hex">--rs-color-border</div></div></div>
+        </div>
+
+        <h3 class="ds-section__subtitle">Content / Text</h3>
+        <div class="ds-swatch-grid">
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#1c1d22"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Content</div><div class="ds-swatch__hex">#1c1d22</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:rgba(28,29,34,0.78)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Secondary</div><div class="ds-swatch__hex">#1c1d22c7</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:rgba(28,29,34,0.54)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Muted</div><div class="ds-swatch__hex">#1c1d228a</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:rgba(28,29,34,0.32)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Placeholder</div><div class="ds-swatch__hex">#1c1d2252</div></div></div>
+        </div>
+
+        <h3 class="ds-section__subtitle">Semantic</h3>
+        <p class="ds-section__desc" style="margin-bottom: var(--rs-space-4);">Use for validation, alerts, and system state. Informational banners and tags use <strong>Primary</strong> tokens, not a parallel blue.</p>
+        <div class="ds-swatch-grid">
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#31b56b"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Success</div><div class="ds-swatch__hex">#31b56b</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:rgba(49,181,107,0.12)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Success Light</div><div class="ds-swatch__hex">#31b56b1f</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#e06179"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Error</div><div class="ds-swatch__hex">#e06179</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:rgba(224,97,121,0.12)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Error Light</div><div class="ds-swatch__hex">#e061791f</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#d89a32"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Warning</div><div class="ds-swatch__hex">#d89a32</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:rgba(216,154,50,0.14)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Warning Light</div><div class="ds-swatch__hex">#d89a3224</div></div></div>
+        </div>
+
+        <h3 class="ds-section__subtitle">Badge tiers (optional gamification)</h3>
+        <p class="ds-section__desc" style="margin-bottom: var(--rs-space-4);">Softer than a consumer game loop: rare follows the active accent; epic reads as slate, legendary as muted bronze.</p>
+        <div class="ds-swatch-grid">
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#6d6f76"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Common</div><div class="ds-swatch__hex">#6d6f76</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-badge-rare)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Rare</div><div class="ds-swatch__hex">accent</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#4d5d7a"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Epic</div><div class="ds-swatch__hex">#4d5d7a</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#957b5c"></div><div class="ds-swatch__info"><div class="ds-swatch__name">Legendary</div><div class="ds-swatch__hex">#957b5c</div></div></div>
+        </div>
+
+        <h3 class="ds-section__subtitle">Category markers &middot; neutral steps</h3>
+        <p class="ds-section__desc" style="margin-bottom: var(--rs-space-4);">Step 1 is the accent hue; 2–6 are neutral ink steps for labels, dots, and pills.</p>
+        <div class="ds-swatch-grid">
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:var(--rs-color-cat-1)"></div><div class="ds-swatch__info"><div class="ds-swatch__name">1 &middot; Accent</div><div class="ds-swatch__hex">--rs-color-cat-1</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#555963"></div><div class="ds-swatch__info"><div class="ds-swatch__name">2 &middot; Neutral</div><div class="ds-swatch__hex">#555963</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#656874"></div><div class="ds-swatch__info"><div class="ds-swatch__name">3 &middot; Neutral</div><div class="ds-swatch__hex">#656874</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#757884"></div><div class="ds-swatch__info"><div class="ds-swatch__name">4 &middot; Neutral</div><div class="ds-swatch__hex">#757884</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#858894"></div><div class="ds-swatch__info"><div class="ds-swatch__name">5 &middot; Neutral</div><div class="ds-swatch__hex">#858894</div></div></div>
+          <div class="ds-swatch"><div class="ds-swatch__color" style="background:#9598a3"></div><div class="ds-swatch__info"><div class="ds-swatch__name">6 &middot; Neutral</div><div class="ds-swatch__hex">#9598a3</div></div></div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           TYPOGRAPHY
+           ======================================== -->
+      <section class="ds-section" id="typography">
+        <h2 class="ds-section__title">Typography</h2>
+        <p class="ds-section__desc">Font: Inter &middot; Weights: 400 (Regular), 500 (Medium), 600 (SemiBold), 700 (Bold)</p>
+
+        <div class="ds-demo">
+          <div style="margin-bottom: var(--rs-space-4);">
+            <span style="font-size: var(--rs-text-xs); color: var(--rs-color-content-muted); font-family: var(--rs-font-mono);">4xl &middot; 2.25rem / 36px</span>
+            <h1>The quick brown fox jumps</h1>
+          </div>
+          <div style="margin-bottom: var(--rs-space-4);">
+            <span style="font-size: var(--rs-text-xs); color: var(--rs-color-content-muted); font-family: var(--rs-font-mono);">3xl &middot; 1.875rem / 30px</span>
+            <h2>The quick brown fox jumps</h2>
+          </div>
+          <div style="margin-bottom: var(--rs-space-4);">
+            <span style="font-size: var(--rs-text-xs); color: var(--rs-color-content-muted); font-family: var(--rs-font-mono);">2xl &middot; 1.5rem / 24px</span>
+            <h3>The quick brown fox jumps</h3>
+          </div>
+          <div style="margin-bottom: var(--rs-space-4);">
+            <span style="font-size: var(--rs-text-xs); color: var(--rs-color-content-muted); font-family: var(--rs-font-mono);">xl &middot; 1.25rem / 20px</span>
+            <h4>The quick brown fox jumps</h4>
+          </div>
+          <div style="margin-bottom: var(--rs-space-4);">
+            <span style="font-size: var(--rs-text-xs); color: var(--rs-color-content-muted); font-family: var(--rs-font-mono);">lg &middot; 1.125rem / 18px</span>
+            <h5>The quick brown fox jumps</h5>
+          </div>
+          <div style="margin-bottom: var(--rs-space-4);">
+            <span style="font-size: var(--rs-text-xs); color: var(--rs-color-content-muted); font-family: var(--rs-font-mono);">base &middot; 1rem / 16px</span>
+            <p>The quick brown fox jumps over the lazy dog. This is the default body text size used throughout the application.</p>
+          </div>
+          <div style="margin-bottom: var(--rs-space-4);">
+            <span style="font-size: var(--rs-text-xs); color: var(--rs-color-content-muted); font-family: var(--rs-font-mono);">sm &middot; 0.875rem / 14px</span>
+            <p style="font-size: var(--rs-text-sm);">The quick brown fox jumps over the lazy dog. Used for secondary content and metadata.</p>
+          </div>
+          <div>
+            <span style="font-size: var(--rs-text-xs); color: var(--rs-color-content-muted); font-family: var(--rs-font-mono);">xs &middot; 0.75rem / 12px</span>
+            <p style="font-size: var(--rs-text-xs);">The quick brown fox jumps over the lazy dog. Used for labels, timestamps, and fine print.</p>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           SPACING
+           ======================================== -->
+      <section class="ds-section" id="spacing">
+        <h2 class="ds-section__title">Spacing</h2>
+        <p class="ds-section__desc">4px base grid. Token names mirror Tailwind conventions for easy migration.</p>
+
+        <div class="ds-demo">
+          <div class="ds-space-bar"><div class="ds-space-bar__label">0.5 &middot; 2px</div><div class="ds-space-bar__visual" style="width:2px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">1 &middot; 4px</div><div class="ds-space-bar__visual" style="width:4px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">2 &middot; 8px</div><div class="ds-space-bar__visual" style="width:8px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">3 &middot; 12px</div><div class="ds-space-bar__visual" style="width:12px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">4 &middot; 16px</div><div class="ds-space-bar__visual" style="width:16px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">5 &middot; 20px</div><div class="ds-space-bar__visual" style="width:20px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">6 &middot; 24px</div><div class="ds-space-bar__visual" style="width:24px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">8 &middot; 32px</div><div class="ds-space-bar__visual" style="width:32px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">10 &middot; 40px</div><div class="ds-space-bar__visual" style="width:40px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">12 &middot; 48px</div><div class="ds-space-bar__visual" style="width:48px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">16 &middot; 64px</div><div class="ds-space-bar__visual" style="width:64px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">20 &middot; 80px</div><div class="ds-space-bar__visual" style="width:80px;"></div></div>
+          <div class="ds-space-bar"><div class="ds-space-bar__label">24 &middot; 96px</div><div class="ds-space-bar__visual" style="width:96px;"></div></div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           RADIUS & SHADOWS
+           ======================================== -->
+      <section class="ds-section" id="radius-shadows">
+        <h2 class="ds-section__title">Radius & Shadows</h2>
+
+        <h3 class="ds-section__subtitle">Border Radius</h3>
+        <div class="ds-demo">
+          <div class="ds-demo__row">
+            <div style="width:56px;height:56px;background:var(--rs-color-primary-subdued);border:1px solid var(--rs-color-primary-subtle);border-radius:var(--rs-radius-sm);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">sm</span></div>
+            <div style="width:56px;height:56px;background:var(--rs-color-primary-subdued);border:1px solid var(--rs-color-primary-subtle);border-radius:var(--rs-radius-md);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">md</span></div>
+            <div style="width:56px;height:56px;background:var(--rs-color-primary-subdued);border:1px solid var(--rs-color-primary-subtle);border-radius:var(--rs-radius);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">8px</span></div>
+            <div style="width:56px;height:56px;background:var(--rs-color-primary-subdued);border:1px solid var(--rs-color-primary-subtle);border-radius:var(--rs-radius-lg);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">lg</span></div>
+            <div style="width:56px;height:56px;background:var(--rs-color-primary-subdued);border:1px solid var(--rs-color-primary-subtle);border-radius:var(--rs-radius-xl);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">xl</span></div>
+            <div style="width:56px;height:56px;background:var(--rs-color-primary-subdued);border:1px solid var(--rs-color-primary-subtle);border-radius:var(--rs-radius-full);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">full</span></div>
+          </div>
+        </div>
+
+        <h3 class="ds-section__subtitle">Shadows</h3>
+        <div class="ds-demo">
+          <div class="ds-demo__row" style="gap:var(--rs-space-6);">
+            <div style="width:100px;height:80px;background:var(--rs-color-surface);border-radius:var(--rs-radius);box-shadow:var(--rs-shadow-sm);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">sm</span></div>
+            <div style="width:100px;height:80px;background:var(--rs-color-surface);border-radius:var(--rs-radius);box-shadow:var(--rs-shadow);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">default</span></div>
+            <div style="width:100px;height:80px;background:var(--rs-color-surface);border-radius:var(--rs-radius);box-shadow:var(--rs-shadow-md);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">md</span></div>
+            <div style="width:100px;height:80px;background:var(--rs-color-surface);border-radius:var(--rs-radius);box-shadow:var(--rs-shadow-lg);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">lg</span></div>
+            <div style="width:100px;height:80px;background:var(--rs-color-surface);border-radius:var(--rs-radius);box-shadow:var(--rs-shadow-xl);display:flex;align-items:center;justify-content:center;"><span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">xl</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           BUTTONS
+           ======================================== -->
+      <section class="ds-section" id="buttons">
+        <h2 class="ds-section__title">Buttons</h2>
+
+        <div class="ds-demo">
+          <div class="ds-demo__label">Variants</div>
+          <div class="ds-demo__row">
+            <button class="rs-btn rs-btn--md rs-btn--primary">Primary</button>
+            <button class="rs-btn rs-btn--md rs-btn--secondary">Secondary</button>
+            <button class="rs-btn rs-btn--md rs-btn--ghost">Ghost</button>
+            <button class="rs-btn rs-btn--md rs-btn--destructive">Destructive</button>
+          </div>
+
+          <div class="ds-demo__label">Sizes</div>
+          <div class="ds-demo__row">
+            <button class="rs-btn rs-btn--sm rs-btn--primary">Small</button>
+            <button class="rs-btn rs-btn--md rs-btn--primary">Medium</button>
+            <button class="rs-btn rs-btn--lg rs-btn--primary">Large</button>
+          </div>
+
+          <div class="ds-demo__label">With Icons</div>
+          <div class="ds-demo__row">
+            <button class="rs-btn rs-btn--md rs-btn--primary"><i data-lucide="plus" style="width:16px;height:16px;"></i> New Post</button>
+            <button class="rs-btn rs-btn--md rs-btn--secondary"><i data-lucide="share-2" style="width:16px;height:16px;"></i> Share</button>
+            <button class="rs-btn rs-btn--md rs-btn--icon rs-btn--secondary"><i data-lucide="bell" style="width:18px;height:18px;"></i></button>
+            <button class="rs-btn rs-btn--md rs-btn--icon rs-btn--ghost"><i data-lucide="settings" style="width:18px;height:18px;"></i></button>
+          </div>
+
+          <div class="ds-demo__label">States</div>
+          <div class="ds-demo__row">
+            <button class="rs-btn rs-btn--md rs-btn--primary" disabled>Disabled</button>
+            <button class="rs-btn rs-btn--md rs-btn--primary rs-btn--loading">Loading</button>
+            <button class="rs-btn rs-btn--md rs-btn--secondary" disabled>Disabled</button>
+            <button class="rs-btn rs-btn--md rs-btn--secondary rs-btn--loading">Loading</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           NAVIGATION
+           ======================================== -->
+      <section class="ds-section" id="navigation">
+        <h2 class="ds-section__title">Navigation Header</h2>
+
+        <div class="rs-header ds-mockup-header">
+          <div class="rs-header__inner">
+            <div class="rs-header__left">
+              <a href="#" class="rs-header__logo">
+                <div class="rs-header__logo-icon"><i data-lucide="zap" style="width:18px;height:18px;color:white;"></i></div>
+                Roar
+              </a>
+              <nav class="rs-header__nav">
+                <a href="#" class="rs-header__nav-link rs-header__nav-link--active">Feed</a>
+                <a href="#" class="rs-header__nav-link">Leaderboard</a>
+                <a href="#" class="rs-header__nav-link">Courses</a>
+                <a href="#" class="rs-header__nav-link">Categories</a>
+              </nav>
+            </div>
+            <div class="rs-header__right">
+              <div class="rs-search">
+                <i data-lucide="search" class="rs-search__icon"></i>
+                <input type="text" class="rs-search__input" placeholder="Search posts...">
+                <kbd class="rs-search__kbd">/</kbd>
+              </div>
+              <button class="rs-btn rs-btn--md rs-btn--icon rs-btn--ghost"><i data-lucide="bell" style="width:18px;height:18px;"></i></button>
+              <button class="rs-btn rs-btn--sm rs-btn--primary"><i data-lucide="plus" style="width:14px;height:14px;"></i> New Post</button>
+              <div class="rs-avatar rs-avatar--sm" style="background: linear-gradient(135deg, #2d4cb5, #3563e9); color: white; font-size:11px;">AK</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           SEARCH BAR
+           ======================================== -->
+      <section class="ds-section" id="search">
+        <h2 class="ds-section__title">Search Bar</h2>
+        <div class="ds-demo">
+          <div class="ds-demo__row">
+            <div class="rs-search" style="width:320px;">
+              <i data-lucide="search" class="rs-search__icon"></i>
+              <input type="text" class="rs-search__input" placeholder="Search posts, courses, people..." style="width:100%;">
+              <kbd class="rs-search__kbd">/</kbd>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           AVATARS
+           ======================================== -->
+      <section class="ds-section" id="avatars">
+        <h2 class="ds-section__title">Avatars</h2>
+        <div class="ds-demo">
+          <div class="ds-demo__label">Sizes (rounded square)</div>
+          <div class="ds-demo__row">
+            <div class="rs-avatar rs-avatar--xs" style="background:linear-gradient(135deg,#2d4cb5,#3563e9);color:white;">A</div>
+            <div class="rs-avatar rs-avatar--sm" style="background:linear-gradient(135deg,#3563e9,#5b7fd4);color:white;">BK</div>
+            <div class="rs-avatar rs-avatar--md" style="background:linear-gradient(135deg,#3a4560,#55607a);color:white;">CM</div>
+            <div class="rs-avatar rs-avatar--lg" style="background:linear-gradient(135deg,#1c1d22,#3d4452);color:white;">DL</div>
+            <div class="rs-avatar rs-avatar--xl" style="background:linear-gradient(135deg,#3563e9,#6b8fe0);color:white;">EJ</div>
+          </div>
+
+          <div class="ds-demo__label">With Online Indicator</div>
+          <div class="ds-demo__row">
+            <div class="rs-avatar rs-avatar--sm" style="background:linear-gradient(135deg,#2d4cb5,#3563e9);color:white;">AK<span class="rs-avatar__online"></span></div>
+            <div class="rs-avatar rs-avatar--md" style="background:linear-gradient(135deg,#3563e9,#5b7fd4);color:white;">BK<span class="rs-avatar__online"></span></div>
+            <div class="rs-avatar rs-avatar--lg" style="background:linear-gradient(135deg,#3a4560,#55607a);color:white;">CM<span class="rs-avatar__online"></span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           POST CARDS
+           ======================================== -->
+      <section class="ds-section" id="post-cards">
+        <h2 class="ds-section__title">Post Cards</h2>
+        <p class="ds-section__desc">The core content unit. BetterHunt-style layout: thumbnail left, content center, upvote right.</p>
+
+        <div class="rs-feed" style="max-width:var(--rs-feed-max);">
+          <!-- Card 1 -->
+          <div class="rs-post-card">
+            <div class="rs-post-card__thumb" style="background:linear-gradient(135deg,#2d4cb5,#3563e9);color:white;font-size:24px;">
+              <i data-lucide="bot" style="width:28px;height:28px;"></i>
+            </div>
+            <div class="rs-post-card__content">
+              <div class="rs-post-card__title">AI-Powered Code Review Bot</div>
+              <div class="rs-post-card__desc">Built a custom code review bot using GPT-4 that analyzes PRs and suggests improvements. Reduced review cycle time by 40%.</div>
+              <div class="rs-post-card__tags">
+                <span class="rs-tag rs-tag--cat-1">AI Projects</span>
+                <span class="rs-tag rs-tag--neutral">automation</span>
+              </div>
+              <div class="rs-post-card__meta" style="margin-top: var(--rs-space-2);">
+                <span class="rs-post-card__meta-item">
+                  <div class="rs-avatar rs-avatar--xs" style="background:#3563e9;color:white;font-size:8px;">SK</div>
+                  Sarah K.
+                </span>
+                <span class="rs-post-card__meta-item"><i data-lucide="message-circle" style="width:13px;height:13px;"></i> 12</span>
+                <span class="rs-post-card__meta-item"><i data-lucide="clock" style="width:13px;height:13px;"></i> 2h ago</span>
+              </div>
+            </div>
+            <button class="rs-upvote" data-upvote>
+              <svg class="rs-upvote__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+              <span class="rs-upvote__count">47</span>
+            </button>
+          </div>
+
+          <!-- Card 2 -->
+          <div class="rs-post-card">
+            <div class="rs-post-card__thumb" style="background:linear-gradient(135deg,#3563e9,#5b7fd4);color:white;font-size:24px;">
+              <i data-lucide="video" style="width:28px;height:28px;"></i>
+            </div>
+            <div class="rs-post-card__content">
+              <div class="rs-post-card__title">Loom: How I Fine-Tuned a Model on Internal Data</div>
+              <div class="rs-post-card__desc">A walkthrough of my fine-tuning process for our customer support model. Includes prompt engineering tips and evaluation metrics.</div>
+              <div class="rs-post-card__tags">
+                <span class="rs-tag rs-tag--cat-2">Tutorials</span>
+                <span class="rs-tag rs-tag--neutral">fine-tuning</span>
+                <span class="rs-tag rs-tag--neutral">loom</span>
+              </div>
+              <div class="rs-post-card__meta" style="margin-top: var(--rs-space-2);">
+                <span class="rs-post-card__meta-item">
+                  <div class="rs-avatar rs-avatar--xs" style="background:#5b7fd4;color:white;font-size:8px;">MJ</div>
+                  Mike J.
+                </span>
+                <span class="rs-post-card__meta-item"><i data-lucide="message-circle" style="width:13px;height:13px;"></i> 8</span>
+                <span class="rs-post-card__meta-item"><i data-lucide="clock" style="width:13px;height:13px;"></i> 5h ago</span>
+              </div>
+            </div>
+            <button class="rs-upvote rs-upvote--active" data-upvote>
+              <svg class="rs-upvote__icon" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+              <span class="rs-upvote__count">32</span>
+            </button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           UPVOTE BUTTON
+           ======================================== -->
+      <section class="ds-section" id="upvote">
+        <h2 class="ds-section__title">Upvote Button</h2>
+        <p class="ds-section__desc">Click to toggle. Spring animation on hover, fills orange when active.</p>
+
+        <div class="ds-demo">
+          <div class="ds-demo__row" style="gap: var(--rs-space-6);">
+            <div style="text-align:center;">
+              <div class="ds-demo__label">Default</div>
+              <button class="rs-upvote" data-upvote>
+                <svg class="rs-upvote__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                <span class="rs-upvote__count">24</span>
+              </button>
+            </div>
+            <div style="text-align:center;">
+              <div class="ds-demo__label">Active (Voted)</div>
+              <button class="rs-upvote rs-upvote--active" data-upvote>
+                <svg class="rs-upvote__icon" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg>
+                <span class="rs-upvote__count">25</span>
+              </button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           TAGS & PILLS
+           ======================================== -->
+      <section class="ds-section" id="tags">
+        <h2 class="ds-section__title">Tags & Pills</h2>
+
+        <div class="ds-demo">
+          <div class="ds-demo__label">Category Tags</div>
+          <div class="ds-demo__row">
+            <span class="rs-tag rs-tag--cat-1">AI Projects</span>
+            <span class="rs-tag rs-tag--cat-2">Tutorials</span>
+            <span class="rs-tag rs-tag--cat-3">Tools</span>
+            <span class="rs-tag rs-tag--cat-4">Prompts</span>
+            <span class="rs-tag rs-tag--cat-5">Case Studies</span>
+            <span class="rs-tag rs-tag--cat-6">Resources</span>
+          </div>
+
+          <div class="ds-demo__label">Neutral & Primary</div>
+          <div class="ds-demo__row">
+            <span class="rs-tag rs-tag--neutral">automation</span>
+            <span class="rs-tag rs-tag--neutral">GPT-4</span>
+            <span class="rs-tag rs-tag--primary">featured</span>
+          </div>
+
+          <div class="ds-demo__label">Semantic</div>
+          <div class="ds-demo__row">
+            <span class="rs-tag rs-tag--success">Published</span>
+            <span class="rs-tag rs-tag--error">Removed</span>
+            <span class="rs-tag rs-tag--warning">Draft</span>
+            <span class="rs-tag rs-tag--info">New</span>
+          </div>
+
+          <div class="ds-demo__label">Difficulty Levels</div>
+          <div class="ds-demo__row">
+            <span class="rs-tag rs-tag--beginner">Beginner</span>
+            <span class="rs-tag rs-tag--intermediate">Intermediate</span>
+            <span class="rs-tag rs-tag--advanced">Advanced</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           FEED LAYOUT
+           ======================================== -->
+      <section class="ds-section" id="feed">
+        <h2 class="ds-section__title">Feed Layout</h2>
+        <p class="ds-section__desc">Connected card list with date group headers. No gaps between cards.</p>
+
+        <div class="rs-feed" style="max-width:var(--rs-feed-max);">
+          <div class="rs-feed__date-header">Today - March 31, 2026</div>
+
+          <div class="rs-post-card">
+            <div class="rs-post-card__thumb" style="background:linear-gradient(135deg,#3a4560,#55607a);color:white;"><i data-lucide="wrench" style="width:28px;height:28px;"></i></div>
+            <div class="rs-post-card__content">
+              <div class="rs-post-card__title">Cursor AI Tips & Tricks Collection</div>
+              <div class="rs-post-card__desc">A curated list of productivity shortcuts and custom prompts for Cursor IDE.</div>
+              <div class="rs-post-card__tags"><span class="rs-tag rs-tag--cat-3">Tools</span></div>
+              <div class="rs-post-card__meta" style="margin-top:var(--rs-space-2);"><span class="rs-post-card__meta-item"><div class="rs-avatar rs-avatar--xs" style="background:#55607a;color:white;font-size:8px;">RL</div>Ryan L.</span><span class="rs-post-card__meta-item"><i data-lucide="message-circle" style="width:13px;height:13px;"></i> 15</span></div>
+            </div>
+            <button class="rs-upvote" data-upvote><svg class="rs-upvote__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg><span class="rs-upvote__count">38</span></button>
+          </div>
+
+          <div class="rs-post-card">
+            <div class="rs-post-card__thumb" style="background:linear-gradient(135deg,#1c1d22,#3d4452);color:white;"><i data-lucide="terminal" style="width:28px;height:28px;"></i></div>
+            <div class="rs-post-card__content">
+              <div class="rs-post-card__title">Prompt Engineering for SQL Generation</div>
+              <div class="rs-post-card__desc">My collection of prompts that generate production-quality SQL from natural language.</div>
+              <div class="rs-post-card__tags"><span class="rs-tag rs-tag--cat-4">Prompts</span></div>
+              <div class="rs-post-card__meta" style="margin-top:var(--rs-space-2);"><span class="rs-post-card__meta-item"><div class="rs-avatar rs-avatar--xs" style="background:#4a5568;color:white;font-size:8px;">JD</div>Jane D.</span><span class="rs-post-card__meta-item"><i data-lucide="message-circle" style="width:13px;height:13px;"></i> 6</span></div>
+            </div>
+            <button class="rs-upvote" data-upvote><svg class="rs-upvote__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg><span class="rs-upvote__count">21</span></button>
+          </div>
+
+          <div class="rs-feed__date-header">Yesterday - March 30, 2026</div>
+
+          <div class="rs-post-card">
+            <div class="rs-post-card__thumb" style="background:linear-gradient(135deg,#3563e9,#4d6ec9);color:white;"><i data-lucide="file-text" style="width:28px;height:28px;"></i></div>
+            <div class="rs-post-card__content">
+              <div class="rs-post-card__title">Case Study: RAG Pipeline for Legal Documents</div>
+              <div class="rs-post-card__desc">How we built a retrieval-augmented generation system for our legal team, reducing document review time by 60%.</div>
+              <div class="rs-post-card__tags"><span class="rs-tag rs-tag--cat-5">Case Studies</span><span class="rs-tag rs-tag--neutral">RAG</span></div>
+              <div class="rs-post-card__meta" style="margin-top:var(--rs-space-2);"><span class="rs-post-card__meta-item"><div class="rs-avatar rs-avatar--xs" style="background:#4d6ec9;color:white;font-size:8px;">AP</div>Alex P.</span><span class="rs-post-card__meta-item"><i data-lucide="message-circle" style="width:13px;height:13px;"></i> 23</span></div>
+            </div>
+            <button class="rs-upvote rs-upvote--active" data-upvote><svg class="rs-upvote__icon" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg><span class="rs-upvote__count">56</span></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           COMMENTS
+           ======================================== -->
+      <section class="ds-section" id="comments">
+        <h2 class="ds-section__title">Comments</h2>
+
+        <div class="ds-demo">
+          <div class="rs-comment">
+            <div class="rs-avatar rs-avatar--sm" style="background:linear-gradient(135deg,#2d4cb5,#3563e9);color:white;font-size:10px;">SK</div>
+            <div class="rs-comment__body-wrap">
+              <div class="rs-comment__header">
+                <span class="rs-comment__author">Sarah K.</span>
+                <span class="rs-comment__time">2 hours ago</span>
+              </div>
+              <div class="rs-comment__text">This is incredible work! I've been looking for exactly this kind of approach for our team. Would love to know how you handled the edge cases with malformed SQL queries.</div>
+              <div class="rs-comment__actions">
+                <button class="rs-comment__action"><i data-lucide="chevron-up" style="width:14px;height:14px;"></i> 5</button>
+                <button class="rs-comment__action"><i data-lucide="message-circle" style="width:14px;height:14px;"></i> Reply</button>
+              </div>
+
+              <!-- Nested reply -->
+              <div class="rs-comment__replies">
+                <div class="rs-comment" style="border-top:none;padding-top:var(--rs-space-3);">
+                  <div class="rs-avatar rs-avatar--sm" style="background:linear-gradient(135deg,#1c1d22,#3d4452);color:white;font-size:10px;">JD</div>
+                  <div class="rs-comment__body-wrap">
+                    <div class="rs-comment__header">
+                      <span class="rs-comment__author">Jane D.</span>
+                      <span class="rs-comment__time">1 hour ago</span>
+                    </div>
+                    <div class="rs-comment__text">Great question! I added a validation layer that checks the generated SQL against our schema before executing. Happy to share the code!</div>
+                    <div class="rs-comment__actions">
+                      <button class="rs-comment__action"><i data-lucide="chevron-up" style="width:14px;height:14px;"></i> 3</button>
+                      <button class="rs-comment__action"><i data-lucide="message-circle" style="width:14px;height:14px;"></i> Reply</button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           BADGES
+           ======================================== -->
+      <section class="ds-section" id="badges">
+        <h2 class="ds-section__title">Badges</h2>
+        <p class="ds-section__desc">Four optional tiers for engagement surfaces. Legendary keeps a light shimmer—noticeable, not flashy.</p>
+
+        <div class="ds-demo">
+          <div class="ds-demo__row" style="gap:var(--rs-space-4);">
+            <div class="rs-badge rs-badge--common"><div class="rs-badge__icon">&#127793;</div><span>First Share</span></div>
+            <div class="rs-badge rs-badge--rare"><div class="rs-badge__icon">&#128172;</div><span>Conversation Starter</span></div>
+            <div class="rs-badge rs-badge--epic"><div class="rs-badge__icon">&#128293;</div><span>Hot Take</span></div>
+            <div class="rs-badge rs-badge--legendary"><div class="rs-badge__icon">&#127942;</div><span>Top Contributor</span></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           LEADERBOARD
+           ======================================== -->
+      <section class="ds-section" id="leaderboard">
+        <h2 class="ds-section__title">Leaderboard</h2>
+
+        <div style="border:1px solid var(--rs-color-border);border-radius:var(--rs-radius-lg);overflow:hidden;">
+          <div class="rs-leaderboard-row">
+            <div class="rs-leaderboard-row__rank rs-leaderboard-row__rank--1">1</div>
+            <div class="rs-leaderboard-row__user">
+              <div class="rs-avatar rs-avatar--md" style="background:linear-gradient(135deg,var(--rs-color-avatar-neutral-a),var(--rs-color-avatar-neutral-b));color:var(--rs-color-content-on-primary);">SK</div>
+              <div><div class="rs-leaderboard-row__name">Sarah Kim</div><div class="rs-leaderboard-row__dept">Engineering</div></div>
+            </div>
+            <div class="rs-leaderboard-row__stats">
+              <div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">1,240</div><div class="rs-leaderboard-row__stat-label">Points</div></div>
+              <div class="rs-leaderboard-row__stat"><div class="rs-streak rs-streak--active"><span class="rs-streak__icon">&#128293;</span> 14d</div></div>
+              <div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">8</div><div class="rs-leaderboard-row__stat-label">Badges</div></div>
+            </div>
+          </div>
+
+          <div class="rs-leaderboard-row">
+            <div class="rs-leaderboard-row__rank rs-leaderboard-row__rank--2">2</div>
+            <div class="rs-leaderboard-row__user">
+              <div class="rs-avatar rs-avatar--md" style="background:linear-gradient(135deg,var(--rs-color-primary-pressed),var(--rs-color-primary));color:var(--rs-color-content-on-primary);">MJ</div>
+              <div><div class="rs-leaderboard-row__name">Mike Johnson</div><div class="rs-leaderboard-row__dept">Data Science</div></div>
+            </div>
+            <div class="rs-leaderboard-row__stats">
+              <div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">980</div><div class="rs-leaderboard-row__stat-label">Points</div></div>
+              <div class="rs-leaderboard-row__stat"><div class="rs-streak"><span class="rs-streak__icon">&#128293;</span> 7d</div></div>
+              <div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">6</div><div class="rs-leaderboard-row__stat-label">Badges</div></div>
+            </div>
+          </div>
+
+          <div class="rs-leaderboard-row">
+            <div class="rs-leaderboard-row__rank rs-leaderboard-row__rank--3">3</div>
+            <div class="rs-leaderboard-row__user">
+              <div class="rs-avatar rs-avatar--md" style="background:linear-gradient(135deg,var(--rs-color-avatar-muted-a),var(--rs-color-avatar-muted-b));color:var(--rs-color-content-on-primary);">RL</div>
+              <div><div class="rs-leaderboard-row__name">Ryan Lee</div><div class="rs-leaderboard-row__dept">Product</div></div>
+            </div>
+            <div class="rs-leaderboard-row__stats">
+              <div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">870</div><div class="rs-leaderboard-row__stat-label">Points</div></div>
+              <div class="rs-leaderboard-row__stat"><div class="rs-streak"><span class="rs-streak__icon">&#128293;</span> 3d</div></div>
+              <div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">5</div><div class="rs-leaderboard-row__stat-label">Badges</div></div>
+            </div>
+          </div>
+
+          <div class="rs-leaderboard-row">
+            <div class="rs-leaderboard-row__rank">4</div>
+            <div class="rs-leaderboard-row__user">
+              <div class="rs-avatar rs-avatar--md" style="background:linear-gradient(135deg,var(--rs-color-primary),var(--rs-color-primary-hover));color:var(--rs-color-content-on-primary);">AP</div>
+              <div><div class="rs-leaderboard-row__name">Alex Park</div><div class="rs-leaderboard-row__dept">Design</div></div>
+            </div>
+            <div class="rs-leaderboard-row__stats">
+              <div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">650</div><div class="rs-leaderboard-row__stat-label">Points</div></div>
+              <div class="rs-leaderboard-row__stat"><div class="rs-streak"><span class="rs-streak__icon">&#128293;</span> 1d</div></div>
+              <div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">3</div><div class="rs-leaderboard-row__stat-label">Badges</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           PROFILE CARD
+           ======================================== -->
+      <section class="ds-section" id="profile">
+        <h2 class="ds-section__title">Profile Card</h2>
+
+        <div class="ds-grid-3">
+          <div class="rs-profile-card">
+            <div class="rs-avatar rs-avatar--xl rs-profile-card__avatar" style="background:linear-gradient(135deg,#1c1d22,#3d4452);color:white;">SK</div>
+            <div class="rs-profile-card__name">Sarah Kim</div>
+            <div class="rs-profile-card__title">Senior Engineer</div>
+            <div class="rs-profile-card__dept">Engineering</div>
+            <div class="rs-profile-card__stats">
+              <div><div class="rs-profile-card__stat-value">24</div><div class="rs-profile-card__stat-label">Posts</div></div>
+              <div><div class="rs-profile-card__stat-value">1,240</div><div class="rs-profile-card__stat-label">Points</div></div>
+              <div><div class="rs-profile-card__stat-value">8</div><div class="rs-profile-card__stat-label">Badges</div></div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           COURSE CARDS
+           ======================================== -->
+      <section class="ds-section" id="courses">
+        <h2 class="ds-section__title">Course Cards</h2>
+
+        <div class="ds-grid-3">
+          <div class="rs-course-card">
+            <div class="rs-course-card__thumb" style="background:linear-gradient(135deg,#2d4cb5,#3563e9);color:white;">
+              <i data-lucide="sparkles" style="width:40px;height:40px;"></i>
+              <span class="rs-tag rs-tag--beginner rs-course-card__difficulty">Beginner</span>
+            </div>
+            <div class="rs-course-card__body">
+              <div class="rs-course-card__title">Intro to Prompt Engineering</div>
+              <div class="rs-course-card__desc">Learn the fundamentals of crafting effective prompts for LLMs.</div>
+              <div class="rs-progress-group" style="margin-bottom:var(--rs-space-3);">
+                <div class="rs-progress-group__label"><span>Progress</span><span>60%</span></div>
+                <div class="rs-progress"><div class="rs-progress__fill" style="width:60%;"></div></div>
+              </div>
+              <div class="rs-course-card__footer">
+                <div class="rs-course-card__author"><div class="rs-avatar rs-avatar--xs" style="background:#3563e9;color:white;font-size:8px;">SK</div>Sarah K.</div>
+                <span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">3h</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="rs-course-card">
+            <div class="rs-course-card__thumb" style="background:linear-gradient(135deg,#1c1d22,#3d4452);color:white;">
+              <i data-lucide="database" style="width:40px;height:40px;"></i>
+              <span class="rs-tag rs-tag--intermediate rs-course-card__difficulty">Intermediate</span>
+            </div>
+            <div class="rs-course-card__body">
+              <div class="rs-course-card__title">Building RAG Pipelines</div>
+              <div class="rs-course-card__desc">Retrieval-augmented generation from theory to production deployment.</div>
+              <div class="rs-progress-group" style="margin-bottom:var(--rs-space-3);">
+                <div class="rs-progress-group__label"><span>Progress</span><span>25%</span></div>
+                <div class="rs-progress"><div class="rs-progress__fill" style="width:25%;"></div></div>
+              </div>
+              <div class="rs-course-card__footer">
+                <div class="rs-course-card__author"><div class="rs-avatar rs-avatar--xs" style="background:#4a5568;color:white;font-size:8px;">MJ</div>Mike J.</div>
+                <span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">8h</span>
+              </div>
+            </div>
+          </div>
+
+          <div class="rs-course-card">
+            <div class="rs-course-card__thumb" style="background:linear-gradient(135deg,#c9455c,#e06179);color:white;">
+              <i data-lucide="shield" style="width:40px;height:40px;"></i>
+              <span class="rs-tag rs-tag--advanced rs-course-card__difficulty">Advanced</span>
+            </div>
+            <div class="rs-course-card__body">
+              <div class="rs-course-card__title">AI Safety & Red Teaming</div>
+              <div class="rs-course-card__desc">Advanced techniques for testing and securing AI systems in production.</div>
+              <div class="rs-progress-group" style="margin-bottom:var(--rs-space-3);">
+                <div class="rs-progress-group__label"><span>Progress</span><span>100%</span></div>
+                <div class="rs-progress"><div class="rs-progress__fill rs-progress__fill--complete" style="width:100%;"></div></div>
+              </div>
+              <div class="rs-course-card__footer">
+                <div class="rs-course-card__author"><div class="rs-avatar rs-avatar--xs" style="background:#e06179;color:white;font-size:8px;">AP</div>Alex P.</div>
+                <span style="font-size:var(--rs-text-xs);color:var(--rs-color-content-muted);">12h</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           PROGRESS BARS
+           ======================================== -->
+      <section class="ds-section" id="progress">
+        <h2 class="ds-section__title">Progress Bars</h2>
+
+        <div class="ds-demo" style="max-width:400px;">
+          <div class="rs-progress-group" style="margin-bottom:var(--rs-space-4);">
+            <div class="rs-progress-group__label"><span>Beginner Course</span><span>25%</span></div>
+            <div class="rs-progress"><div class="rs-progress__fill" style="width:25%;"></div></div>
+          </div>
+          <div class="rs-progress-group" style="margin-bottom:var(--rs-space-4);">
+            <div class="rs-progress-group__label"><span>Intermediate Course</span><span>60%</span></div>
+            <div class="rs-progress rs-progress--lg"><div class="rs-progress__fill" style="width:60%;"></div></div>
+          </div>
+          <div class="rs-progress-group">
+            <div class="rs-progress-group__label"><span>Completed!</span><span>100%</span></div>
+            <div class="rs-progress rs-progress--xl"><div class="rs-progress__fill rs-progress__fill--complete" style="width:100%;"></div></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           STATS CARDS
+           ======================================== -->
+      <section class="ds-section" id="stats">
+        <h2 class="ds-section__title">Stats Cards</h2>
+
+        <div class="ds-grid-4">
+          <div class="rs-stat-card">
+            <div class="rs-stat-card__icon" style="background:var(--rs-color-primary-subdued);color:var(--rs-color-primary);"><i data-lucide="file-text" style="width:20px;height:20px;"></i></div>
+            <div class="rs-stat-card__value">142</div>
+            <div class="rs-stat-card__label">Total Posts</div>
+          </div>
+          <div class="rs-stat-card">
+            <div class="rs-stat-card__icon" style="background:var(--rs-color-info-light);color:var(--rs-color-info);"><i data-lucide="users" style="width:20px;height:20px;"></i></div>
+            <div class="rs-stat-card__value">48</div>
+            <div class="rs-stat-card__label">Active Users</div>
+          </div>
+          <div class="rs-stat-card">
+            <div class="rs-stat-card__icon" style="background:var(--rs-color-success-light);color:var(--rs-color-success);"><i data-lucide="chevron-up" style="width:20px;height:20px;"></i></div>
+            <div class="rs-stat-card__value">2,847</div>
+            <div class="rs-stat-card__label">Total Upvotes</div>
+          </div>
+          <div class="rs-stat-card">
+            <div class="rs-stat-card__icon" style="background:var(--rs-color-warning-light);color:var(--rs-color-warning);"><i data-lucide="graduation-cap" style="width:20px;height:20px;"></i></div>
+            <div class="rs-stat-card__value">12</div>
+            <div class="rs-stat-card__label">Courses</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           TABLES
+           ======================================== -->
+      <section class="ds-section" id="tables">
+        <h2 class="ds-section__title">Tables</h2>
+        <p class="ds-section__desc">
+          Wrap data grids in <code style="font-size:0.9em;">.rs-table-wrap</code> for border, radius, and horizontal scroll.
+          The table uses <code style="font-size:0.9em;">.rs-table</code> with optional <code style="font-size:0.9em;">.rs-table--compact</code> or
+          <code style="font-size:0.9em;">.rs-table--striped</code>. Use <code style="font-size:0.9em;">.rs-table__cell--numeric</code> / <code style="font-size:0.9em;">.rs-table__th--numeric</code> for right-aligned figures.
+        </p>
+
+        <h3 class="ds-section__subtitle">Anatomy</h3>
+        <p class="ds-section__desc" style="margin-bottom:var(--rs-space-3);">
+          <strong>caption</strong> (optional title), <strong>thead</strong> with <strong>th</strong>, <strong>tbody</strong> with <strong>tr</strong>/<strong>td</strong>,
+          <strong>tfoot</strong> for summaries. Row hover uses the same surface token as the rest of the system.
+        </p>
+
+        <div class="ds-demo" style="margin-bottom:var(--rs-space-8);">
+          <div class="ds-demo__label">Compact · striped · caption + footer</div>
+          <div class="rs-table-wrap" style="max-width:720px;">
+            <table class="rs-table rs-table--compact rs-table--striped">
+              <caption>Recent payouts (demo)</caption>
+              <thead>
+                <tr>
+                  <th scope="col">Recipient</th>
+                  <th scope="col" class="rs-table__th--numeric">Amount</th>
+                  <th scope="col">Status</th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>Northwind Logistics</td>
+                  <td class="rs-table__cell--numeric">$4,280.00</td>
+                  <td><span class="rs-tag rs-tag--success">Paid</span></td>
+                </tr>
+                <tr>
+                  <td>Harbor Studio Co.</td>
+                  <td class="rs-table__cell--numeric">$1,092.50</td>
+                  <td><span class="rs-tag rs-tag--warning">Pending</span></td>
+                </tr>
+              </tbody>
+              <tfoot>
+                <tr>
+                  <td colspan="3">Totals roll up to finance exports · <a href="dashboard.html" style="color:var(--rs-color-primary);">see dashboard</a></td>
+                </tr>
+              </tfoot>
+            </table>
+          </div>
+        </div>
+
+        <h3 class="ds-section__subtitle">Full example · product list</h3>
+        <div class="rs-table-wrap">
+          <table class="rs-table">
+            <thead>
+              <tr>
+                <th scope="col">SKU</th>
+                <th scope="col">Name</th>
+                <th scope="col" class="rs-table__th--numeric">Units</th>
+                <th scope="col" class="rs-table__th--numeric">Revenue</th>
+                <th scope="col" class="rs-table__th--sortable">Health</th>
+                <th scope="col" style="width:48px;"></th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="rs-table__cell--muted">#P-10492</td>
+                <td>Desk mat · large</td>
+                <td class="rs-table__cell--numeric">842</td>
+                <td class="rs-table__cell--numeric">$18,240</td>
+                <td><span class="rs-tag rs-tag--success">In stock</span></td>
+                <td class="rs-table__cell--actions">
+                  <div class="rs-table-actions" data-table-actions>
+                    <button type="button" class="rs-btn rs-btn--icon rs-btn--ghost rs-btn--sm rs-table-actions__trigger" aria-label="Row actions" aria-expanded="false" aria-haspopup="menu"><i data-lucide="more-horizontal" style="width:16px;height:16px;"></i></button>
+                    <div class="rs-table-actions__menu" hidden role="menu" aria-label="Product actions">
+                      <button type="button" class="rs-table-actions__item" role="menuitem" data-demo-action="view">View details</button>
+                      <button type="button" class="rs-table-actions__item" role="menuitem" data-demo-action="stock">Adjust stock…</button>
+                      <button type="button" class="rs-table-actions__item" role="menuitem" data-demo-action="duplicate">Duplicate SKU</button>
+                      <button type="button" class="rs-table-actions__item rs-table-actions__item--danger" role="menuitem" data-demo-action="archive">Archive product</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="rs-table__cell--muted">#P-8821</td>
+                <td>USB-C hub · 7-in-1</td>
+                <td class="rs-table__cell--numeric">1,204</td>
+                <td class="rs-table__cell--numeric">$41,902</td>
+                <td><span class="rs-tag rs-tag--warning">Low</span></td>
+                <td class="rs-table__cell--actions">
+                  <div class="rs-table-actions" data-table-actions>
+                    <button type="button" class="rs-btn rs-btn--icon rs-btn--ghost rs-btn--sm rs-table-actions__trigger" aria-label="Row actions" aria-expanded="false" aria-haspopup="menu"><i data-lucide="more-horizontal" style="width:16px;height:16px;"></i></button>
+                    <div class="rs-table-actions__menu" hidden role="menu" aria-label="Product actions">
+                      <button type="button" class="rs-table-actions__item" role="menuitem" data-demo-action="view">View details</button>
+                      <button type="button" class="rs-table-actions__item" role="menuitem" data-demo-action="stock">Adjust stock…</button>
+                      <button type="button" class="rs-table-actions__item" role="menuitem" data-demo-action="duplicate">Duplicate SKU</button>
+                      <button type="button" class="rs-table-actions__item rs-table-actions__item--danger" role="menuitem" data-demo-action="archive">Archive product</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+              <tr>
+                <td class="rs-table__cell--muted">#P-3301</td>
+                <td>Mechanical keyboard · 75%</td>
+                <td class="rs-table__cell--numeric">416</td>
+                <td class="rs-table__cell--numeric">$62,180</td>
+                <td><span class="rs-tag rs-tag--success">In stock</span></td>
+                <td class="rs-table__cell--actions">
+                  <div class="rs-table-actions" data-table-actions>
+                    <button type="button" class="rs-btn rs-btn--icon rs-btn--ghost rs-btn--sm rs-table-actions__trigger" aria-label="Row actions" aria-expanded="false" aria-haspopup="menu"><i data-lucide="more-horizontal" style="width:16px;height:16px;"></i></button>
+                    <div class="rs-table-actions__menu" hidden role="menu" aria-label="Product actions">
+                      <button type="button" class="rs-table-actions__item" role="menuitem" data-demo-action="view">View details</button>
+                      <button type="button" class="rs-table-actions__item" role="menuitem" data-demo-action="stock">Adjust stock…</button>
+                      <button type="button" class="rs-table-actions__item" role="menuitem" data-demo-action="duplicate">Duplicate SKU</button>
+                      <button type="button" class="rs-table-actions__item rs-table-actions__item--danger" role="menuitem" data-demo-action="archive">Archive product</button>
+                    </div>
+                  </div>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </section>
+
+      <!-- ========================================
+           CHARTS & DATA VIZ (full gallery → charts.html)
+           ======================================== -->
+      <section class="ds-section" id="charts">
+        <h2 class="ds-section__title">Charts &amp; data visualization</h2>
+        <p class="ds-section__desc">
+          Data charts use <strong>Chart.js</strong> with Roar tokens from <code style="font-size:0.9em;">chart-theme.js</code>.
+          Shells: <code style="font-size:0.9em;">.rs-chart--featured</code> (full detail) and
+          <code style="font-size:0.9em;">.rs-chart--panel</code> (dashboard tiles — smaller canvas, still interactive tooltips).
+          CSS also defines empty, loading, and <code style="font-size:0.9em;">.rs-sparkline</code> for KPI footers.
+          <strong><a href="charts.html" style="color:var(--rs-color-primary);">Charts gallery →</a></strong>
+          · <a href="dashboard.html" style="color:var(--rs-color-primary);">Dashboard prototype</a>
+        </p>
+
+        <div class="ds-demo" style="margin-top:var(--rs-space-4);max-width:420px;">
+          <div class="ds-demo__label">Stat card + <code style="font-size:0.9em;">.rs-sparkline</code></div>
+          <div class="rs-stat-card">
+            <div class="rs-stat-card__icon" style="background:var(--rs-color-primary-subdued);color:var(--rs-color-primary);"><i data-lucide="activity" style="width:20px;height:20px;"></i></div>
+            <div class="rs-stat-card__value">18.4K</div>
+            <div class="rs-stat-card__label">Sessions (7d)</div>
+            <svg class="rs-sparkline" viewBox="0 0 120 28" fill="none" aria-hidden="true">
+              <path d="M4 20L22 22L40 12L58 16L76 8L94 14L112 6" stroke="currentColor" stroke-width="2" stroke-linecap="round" fill="none" opacity="0.9"/>
+            </svg>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           STREAK & POINTS
+           ======================================== -->
+      <section class="ds-section" id="streak-points">
+        <h2 class="ds-section__title">Streak & Points</h2>
+
+        <div class="ds-demo">
+          <div class="ds-demo__label">Streak Counter</div>
+          <div class="ds-demo__row">
+            <div class="rs-streak"><span class="rs-streak__icon">&#128293;</span> 3 days</div>
+            <div class="rs-streak rs-streak--active"><span class="rs-streak__icon">&#128293;</span> 14 days</div>
+            <div class="rs-streak rs-streak--active"><span class="rs-streak__icon">&#128293;</span> 30 days</div>
+          </div>
+
+          <div class="ds-demo__label">Points Display</div>
+          <div class="ds-demo__row">
+            <span class="rs-points"><span class="rs-points__icon">&#11088;</span> 240 pts</span>
+            <span class="rs-points rs-points--lg"><span class="rs-points__icon">&#11088;</span> 1,240</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           FORM ELEMENTS
+           ======================================== -->
+      <section class="ds-section" id="forms">
+        <h2 class="ds-section__title">Form Elements</h2>
+        <p class="ds-section__desc" style="max-width:62ch;margin-bottom:var(--rs-space-4);">
+          Text fields, custom <strong>popover</strong> date &amp; time pickers (<code style="font-size:0.88em;">.rs-picker</code> + <code style="font-size:0.88em;">rs-picker.js</code>), native <strong>range</strong> inputs (<code style="font-size:0.88em;">.rs-range</code> / <code style="font-size:0.88em;">.rs-range-dual</code>), read-only <strong>progress</strong> meters, dropdowns, checkboxes, and radios share the same border, radius, and focus language.
+        </p>
+
+        <div class="ds-demo" style="max-width:520px;">
+          <div class="rs-field" style="margin-bottom:var(--rs-space-4);">
+            <label class="rs-label">Post Title</label>
+            <input type="text" class="rs-input" placeholder="What did you build with AI?">
+          </div>
+
+          <div class="rs-field" style="margin-bottom:var(--rs-space-4);">
+            <label class="rs-label">Description</label>
+            <textarea class="rs-textarea" placeholder="Tell us about your project..." rows="3"></textarea>
+          </div>
+
+          <div class="rs-field" id="dropdown" style="margin-bottom:var(--rs-space-4);">
+            <label class="rs-label" id="category-label">Category</label>
+            <p class="rs-field-msg rs-field-msg--helper" style="margin-bottom:var(--rs-space-2);">
+              Custom <code style="font-size:0.9em;">.rs-dropdown</code>: one radius system for trigger and panel, keyboard-friendly options, closes on outside click or Escape.
+            </p>
+            <div class="rs-dropdown" data-dropdown>
+              <button
+                type="button"
+                class="rs-dropdown__trigger"
+                aria-haspopup="listbox"
+                aria-expanded="false"
+                aria-labelledby="category-label"
+                aria-controls="category-menu"
+              >
+                <span class="rs-dropdown__value is-placeholder" data-dropdown-value>Select a category...</span>
+                <i data-lucide="chevron-down" class="rs-dropdown__chev" aria-hidden="true"></i>
+              </button>
+              <div class="rs-dropdown__menu" id="category-menu" role="listbox" hidden aria-labelledby="category-label">
+                <button type="button" class="rs-dropdown__option is-placeholder" role="option" data-value="" aria-selected="true">Select a category...</button>
+                <button type="button" class="rs-dropdown__option" role="option" data-value="ai" aria-selected="false">AI Projects</button>
+                <button type="button" class="rs-dropdown__option" role="option" data-value="tutorials" aria-selected="false">Tutorials</button>
+                <button type="button" class="rs-dropdown__option" role="option" data-value="tools" aria-selected="false">Tools</button>
+                <button type="button" class="rs-dropdown__option" role="option" data-value="prompts" aria-selected="false">Prompts</button>
+                <button type="button" class="rs-dropdown__option" role="option" data-value="case-studies" aria-selected="false">Case Studies</button>
+              </div>
+              <input type="hidden" name="category" value="" data-dropdown-input>
+            </div>
+          </div>
+
+          <div class="rs-field" id="multiselect" style="margin-bottom:var(--rs-space-4);">
+            <label class="rs-label" id="tags-label">Tags (multi-select)</label>
+            <p class="rs-field-msg rs-field-msg--helper" style="margin-bottom:var(--rs-space-2);">
+              <code style="font-size:0.9em;">.rs-dropdown.rs-dropdown--multiple</code>: same trigger and panel styling as single-select; pick several items with checkboxes. Panel stays open until you click away or press Escape.
+            </p>
+            <div class="rs-dropdown rs-dropdown--multiple">
+              <button
+                type="button"
+                class="rs-dropdown__trigger"
+                aria-haspopup="true"
+                aria-expanded="false"
+                aria-labelledby="tags-label"
+                aria-controls="tags-menu"
+              >
+                <span
+                  class="rs-dropdown__value is-placeholder"
+                  data-multiselect-summary
+                  data-placeholder="Select tags…"
+                >Select tags…</span>
+                <i data-lucide="chevron-down" class="rs-dropdown__chev" aria-hidden="true"></i>
+              </button>
+              <div
+                class="rs-dropdown__menu rs-dropdown__menu--multiselect"
+                id="tags-menu"
+                role="group"
+                hidden
+                aria-labelledby="tags-label"
+              >
+                <label class="rs-multiselect__row"><input type="checkbox" value="ai" data-multiselect-cb> AI Projects</label>
+                <label class="rs-multiselect__row"><input type="checkbox" value="tutorials" data-multiselect-cb checked> Tutorials</label>
+                <label class="rs-multiselect__row"><input type="checkbox" value="tools" data-multiselect-cb checked> Tools</label>
+                <label class="rs-multiselect__row"><input type="checkbox" value="prompts" data-multiselect-cb> Prompts</label>
+                <label class="rs-multiselect__row"><input type="checkbox" value="case-studies" data-multiselect-cb> Case Studies</label>
+              </div>
+              <input type="hidden" name="tags" value="" data-multiselect-hidden>
+            </div>
+          </div>
+
+          <h3 class="ds-section__subtitle" style="margin-top:var(--rs-space-1);">Date, time, sliders &amp; progress</h3>
+
+          <div class="ds-grid-2" style="margin-bottom:var(--rs-space-4);">
+            <div class="rs-field" style="margin-bottom:0;">
+              <span class="rs-sr-only" id="demo-date-label">Start date</span>
+              <div class="rs-picker">
+                <input type="hidden" id="demo-date-value" value="2026-04-19">
+                <button type="button" class="rs-picker__trigger" id="demo-date-trigger" aria-haspopup="dialog" aria-expanded="false" aria-labelledby="demo-date-label">
+                  <i data-lucide="calendar" class="rs-picker__trigger-icon" aria-hidden="true"></i>
+                  <span class="rs-picker__trigger-text">
+                    <span class="rs-picker__trigger-eyebrow" id="demo-date-eyebrow">Select a day</span>
+                    <span class="rs-picker__trigger-value" id="demo-date-display">19.04.2026</span>
+                  </span>
+                  <i data-lucide="chevron-down" class="rs-picker__chev" aria-hidden="true"></i>
+                </button>
+                <div class="rs-picker__panel rs-picker__panel--date" id="demo-date-panel" role="dialog" aria-label="Choose date" hidden>
+                  <div class="rs-date-panel__header">
+                    <div class="rs-date-panel__title" id="demo-date-month-title" aria-live="polite"></div>
+                    <div class="rs-date-panel__nav-group">
+                      <button type="button" class="rs-date-panel__nav" id="demo-date-prev" aria-label="Previous month"><i data-lucide="chevron-left" aria-hidden="true"></i></button>
+                      <button type="button" class="rs-date-panel__nav" id="demo-date-next" aria-label="Next month"><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+                    </div>
+                  </div>
+                  <div class="rs-date-panel__weekdays" id="demo-date-weekdays"></div>
+                  <div class="rs-date-panel__grid" id="demo-date-grid"></div>
+                  <div class="rs-date-panel__footer rs-date-panel__footer--compact">
+                    <button type="button" class="rs-date-panel__link" id="demo-date-clear">Clear</button>
+                    <button type="button" class="rs-date-panel__link" id="demo-date-today">Today</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="rs-field" style="margin-bottom:0;">
+              <span class="rs-sr-only" id="demo-time-label">Start time</span>
+              <div class="rs-picker">
+                <input type="hidden" id="demo-time-value" value="09:30">
+                <button type="button" class="rs-picker__trigger" id="demo-time-trigger" aria-haspopup="dialog" aria-expanded="false" aria-labelledby="demo-time-label">
+                  <i data-lucide="clock" class="rs-picker__trigger-icon" aria-hidden="true"></i>
+                  <span class="rs-picker__trigger-text">
+                    <span class="rs-picker__trigger-eyebrow" id="demo-time-eyebrow">Start with</span>
+                    <span class="rs-picker__trigger-value" id="demo-time-display">9:30 AM</span>
+                  </span>
+                  <i data-lucide="chevron-down" class="rs-picker__chev" aria-hidden="true"></i>
+                </button>
+                <div class="rs-picker__panel rs-picker__panel--time" id="demo-time-panel" role="dialog" aria-label="Choose time" hidden>
+                  <div class="rs-time-panel__shell">
+                    <div class="rs-time-panel__list-wrap">
+                      <div class="rs-time-panel__col rs-time-panel__col--slots" id="demo-time-slots"></div>
+                    </div>
+                    <div class="rs-time-panel__meridian" role="group" aria-label="Meridiem">
+                      <button type="button" class="rs-time-panel__meridian-btn is-active" id="demo-time-am" aria-pressed="true">AM</button>
+                      <button type="button" class="rs-time-panel__meridian-btn" id="demo-time-pm" aria-pressed="false">PM</button>
+                    </div>
+                  </div>
+                  <div class="rs-date-panel__footer rs-date-panel__footer--compact">
+                    <button type="button" class="rs-date-panel__link" id="demo-time-clear">Clear</button>
+                    <button type="button" class="rs-date-panel__link" id="demo-time-now">Now</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="rs-field" style="margin-bottom:var(--rs-space-4);">
+            <span class="rs-sr-only" id="demo-dt-label">Session start</span>
+            <div class="rs-picker">
+              <input type="hidden" id="demo-dt-value" value="2026-04-19T14:00">
+              <button type="button" class="rs-picker__trigger" id="demo-dt-trigger" aria-haspopup="dialog" aria-expanded="false" aria-labelledby="demo-dt-label">
+                <i data-lucide="calendar-days" class="rs-picker__trigger-icon" aria-hidden="true"></i>
+                <span class="rs-picker__trigger-text">
+                  <span class="rs-picker__trigger-eyebrow" id="demo-dt-eyebrow">Session</span>
+                  <span class="rs-picker__trigger-value" id="demo-dt-display"></span>
+                </span>
+                <i data-lucide="chevron-down" class="rs-picker__chev" aria-hidden="true"></i>
+              </button>
+              <div class="rs-picker__panel rs-picker__panel--datetime" id="demo-dt-panel" role="dialog" aria-label="Choose date and time" hidden>
+                <div class="rs-datetime-panel__body">
+                  <div class="rs-datetime-panel__calendar">
+                    <div class="rs-date-panel__header">
+                      <div class="rs-date-panel__title" id="demo-dt-month-title" aria-live="polite"></div>
+                      <div class="rs-date-panel__nav-group">
+                        <button type="button" class="rs-date-panel__nav" id="demo-dt-prev" aria-label="Previous month"><i data-lucide="chevron-left" aria-hidden="true"></i></button>
+                        <button type="button" class="rs-date-panel__nav" id="demo-dt-next" aria-label="Next month"><i data-lucide="chevron-right" aria-hidden="true"></i></button>
+                      </div>
+                    </div>
+                    <div class="rs-date-panel__weekdays" id="demo-dt-weekdays"></div>
+                    <div class="rs-date-panel__grid" id="demo-dt-grid"></div>
+                  </div>
+                  <div class="rs-datetime-panel__time">
+                    <div class="rs-time-panel__shell">
+                      <div class="rs-time-panel__list-wrap">
+                        <div class="rs-time-panel__col rs-time-panel__col--slots" id="demo-dt-slots"></div>
+                      </div>
+                      <div class="rs-time-panel__meridian" role="group" aria-label="Meridiem">
+                        <button type="button" class="rs-time-panel__meridian-btn is-active" id="demo-dt-am" aria-pressed="true">AM</button>
+                        <button type="button" class="rs-time-panel__meridian-btn" id="demo-dt-pm" aria-pressed="false">PM</button>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+                <div class="rs-date-panel__footer rs-date-panel__footer--compact">
+                  <button type="button" class="rs-date-panel__link" id="demo-dt-clear">Clear</button>
+                  <button type="button" class="rs-date-panel__link" id="demo-dt-today">Today</button>
+                </div>
+              </div>
+            </div>
+            <span class="rs-field-msg rs-field-msg--helper">Date + time in one panel; time list uses 30-minute steps. Values are stored as <code style="font-size:0.9em;">YYYY-MM-DDTHH:mm</code> in the hidden field.</span>
+          </div>
+
+          <div class="rs-field" style="margin-bottom:var(--rs-space-4);">
+            <div class="rs-range__meta">
+              <span class="rs-label" id="demo-range-single-heading" style="margin:0;">Volume (single handle)</span>
+              <span class="rs-range__value" id="demo-range-single-out" aria-live="polite">64</span>
+            </div>
+            <input type="range" class="rs-range" id="demo-range-single" min="0" max="100" value="64" aria-valuemin="0" aria-valuemax="100" aria-valuenow="64" aria-labelledby="demo-range-single-heading">
+          </div>
+
+          <div class="rs-field" style="margin-bottom:var(--rs-space-4);">
+            <div class="rs-range__meta">
+              <span class="rs-label" style="margin:0;">Budget range (two handles)</span>
+              <span class="rs-range__value" id="demo-range-dual-out" aria-live="polite">20 – 70</span>
+            </div>
+            <div class="rs-range-dual" data-range-dual>
+              <div class="rs-range-dual__track">
+                <div class="rs-range-dual__fill"></div>
+              </div>
+              <input type="range" class="rs-range rs-range-dual__input rs-range-dual__input--lower" min="0" max="100" value="20" aria-label="Minimum value">
+              <input type="range" class="rs-range rs-range-dual__input rs-range-dual__input--upper" min="0" max="100" value="70" aria-label="Maximum value">
+            </div>
+            <span class="rs-field-msg rs-field-msg--helper">The filled band uses the shared rail under transparent native tracks; drag either thumb—values stay ordered in the readout.</span>
+          </div>
+
+          <div class="rs-field" style="margin-bottom:var(--rs-space-4);">
+            <label class="rs-label">Form completion</label>
+            <p class="rs-field-msg rs-field-msg--helper" style="margin-bottom:var(--rs-space-2);">Read-only meter — same building blocks as <a href="#progress" style="color:var(--rs-color-primary);font-weight:var(--rs-font-medium);">Progress Bars</a>.</p>
+            <div class="rs-progress-group">
+              <div class="rs-progress-group__label"><span>Required fields</span><span>3 of 7</span></div>
+              <div class="rs-progress"><div class="rs-progress__fill" style="width:42.857%;"></div></div>
+            </div>
+          </div>
+
+          <div class="rs-field" style="margin-bottom:var(--rs-space-4);">
+            <label class="rs-label">URL (with error)</label>
+            <input type="text" class="rs-input rs-input--error" value="not-a-valid-url">
+            <span class="rs-field-msg rs-field-msg--error">Please enter a valid URL</span>
+          </div>
+
+          <div class="rs-field" style="margin-bottom:var(--rs-space-4);">
+            <label class="rs-checkbox"><input type="checkbox" checked> I confirm this is my original work</label>
+          </div>
+
+          <div class="rs-field">
+            <div style="display:flex;flex-direction:column;gap:var(--rs-space-2);">
+              <label class="rs-radio"><input type="radio" name="type" checked> Link</label>
+              <label class="rs-radio"><input type="radio" name="type"> Loom Video</label>
+              <label class="rs-radio"><input type="radio" name="type"> Text Post</label>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           TOASTS
+           ======================================== -->
+      <section class="ds-section" id="toasts">
+        <h2 class="ds-section__title">Toasts / Notifications</h2>
+        <p class="ds-section__desc" style="max-width:62ch;">
+          Close a toast to see it slide away; remaining messages ease up to fill the gap. Use the button to push another sample notification.
+        </p>
+
+        <div class="ds-demo__row" style="margin-bottom:var(--rs-space-4);">
+          <button type="button" class="rs-btn rs-btn--md rs-btn--secondary" id="demo-toast-push">
+            <i data-lucide="bell-ring" style="width:16px;height:16px;"></i>
+            Show another notification
+          </button>
+        </div>
+
+        <div class="rs-toast-stack" id="demo-toast-stack">
+          <div class="rs-toast rs-toast--success">
+            <i data-lucide="check-circle" class="rs-toast__icon" style="color:var(--rs-color-success);"></i>
+            <div class="rs-toast__content"><div class="rs-toast__title">Post Published!</div><div class="rs-toast__message">Your post is now live on the feed.</div></div>
+            <button type="button" class="rs-toast__close" aria-label="Dismiss notification"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+          </div>
+
+          <div class="rs-toast rs-toast--error">
+            <i data-lucide="alert-circle" class="rs-toast__icon" style="color:var(--rs-color-error);"></i>
+            <div class="rs-toast__content"><div class="rs-toast__title">Upload Failed</div><div class="rs-toast__message">The file exceeds the 50MB limit.</div></div>
+            <button type="button" class="rs-toast__close" aria-label="Dismiss notification"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+          </div>
+
+          <div class="rs-toast rs-toast--warning">
+            <i data-lucide="alert-triangle" class="rs-toast__icon" style="color:var(--rs-color-warning);"></i>
+            <div class="rs-toast__content"><div class="rs-toast__title">Draft Saved</div><div class="rs-toast__message">Your post has been saved as a draft.</div></div>
+            <button type="button" class="rs-toast__close" aria-label="Dismiss notification"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+          </div>
+
+          <div class="rs-toast rs-toast--info">
+            <i data-lucide="info" class="rs-toast__icon" style="color:var(--rs-color-info);"></i>
+            <div class="rs-toast__content"><div class="rs-toast__title">New Badge Earned!</div><div class="rs-toast__message">You earned the "Conversation Starter" badge.</div></div>
+            <button type="button" class="rs-toast__close" aria-label="Dismiss notification"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           MODAL
+           ======================================== -->
+      <section class="ds-section" id="modal">
+        <h2 class="ds-section__title">Modals &amp; overlays</h2>
+        <p class="ds-section__desc" style="max-width:70ch;margin-bottom:var(--rs-space-4);">
+          Pop-ups use a full-screen <strong>scrim</strong> (<code style="font-size:0.88em;">.rs-modal-overlay</code>) with <code style="font-size:0.88em;">position: fixed</code> so the dimmed layer covers the viewport (in this demo the dialog markup lives at the end of <code style="font-size:0.88em;">&lt;body&gt;</code> so it is not clipped by animated layout sections).
+          The <strong>dialog</strong> (<code style="font-size:0.88em;">.rs-modal</code>) is centered in the scrim. Click the backdrop to dismiss, press <kbd style="font-size:0.85em;padding:1px 6px;border:1px solid var(--rs-color-border);border-radius:4px;">Esc</kbd>, or use the close control.
+          <strong>Layouts:</strong> default (narrow form), width utilities (<code style="font-size:0.88em;">.rs-modal--md</code> / <code style="font-size:0.88em;">--lg</code> / <code style="font-size:0.88em;">--xl</code>), and the split <strong>settings</strong> shell (<code style="font-size:0.88em;">.rs-modal--settings</code> with <code style="font-size:0.88em;">.rs-settings-*</code> regions).
+          In production, trap focus inside the dialog and restore focus to the opener on close.
+        </p>
+
+        <div class="ds-demo__row" style="flex-wrap:wrap;">
+          <button type="button" class="rs-btn rs-btn--md rs-btn--primary" id="open-demo-modal">Open sample modal</button>
+          <button type="button" class="rs-btn rs-btn--md rs-btn--secondary" id="open-settings-modal">
+            <i data-lucide="settings-2" style="width:16px;height:16px;"></i>
+            Workspace settings
+          </button>
+        </div>
+
+      </section>
+
+      <!-- ========================================
+           EMPTY STATE
+           ======================================== -->
+      <section class="ds-section" id="empty">
+        <h2 class="ds-section__title">Empty State</h2>
+
+        <div class="ds-demo">
+          <div class="rs-empty">
+            <div class="rs-empty__icon"><i data-lucide="inbox" style="width:36px;height:36px;"></i></div>
+            <div class="rs-empty__title">No posts yet</div>
+            <div class="rs-empty__desc">Be the first to share your AI work with the team. Your contributions help everyone learn and grow.</div>
+            <button class="rs-btn rs-btn--md rs-btn--primary"><i data-lucide="plus" style="width:16px;height:16px;"></i> Create First Post</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           SKELETONS
+           ======================================== -->
+      <section class="ds-section" id="skeletons">
+        <h2 class="ds-section__title">Skeleton Loaders</h2>
+        <p class="ds-section__desc">Shimmer animation placeholders that mirror the post card layout.</p>
+
+        <div style="border:1px solid var(--rs-color-border);border-radius:var(--rs-radius-lg);overflow:hidden;max-width:var(--rs-feed-max);">
+          <div class="rs-skeleton--card">
+            <div class="rs-skeleton rs-skeleton--thumb"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:var(--rs-space-2);">
+              <div class="rs-skeleton rs-skeleton--title"></div>
+              <div class="rs-skeleton rs-skeleton--text" style="width:90%;"></div>
+              <div class="rs-skeleton rs-skeleton--text" style="width:40%;"></div>
+            </div>
+            <div class="rs-skeleton" style="width:52px;height:60px;border-radius:var(--rs-radius);"></div>
+          </div>
+          <div class="rs-skeleton--card">
+            <div class="rs-skeleton rs-skeleton--thumb"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:var(--rs-space-2);">
+              <div class="rs-skeleton rs-skeleton--title" style="width:70%;"></div>
+              <div class="rs-skeleton rs-skeleton--text" style="width:85%;"></div>
+              <div class="rs-skeleton rs-skeleton--text" style="width:35%;"></div>
+            </div>
+            <div class="rs-skeleton" style="width:52px;height:60px;border-radius:var(--rs-radius);"></div>
+          </div>
+          <div class="rs-skeleton--card">
+            <div class="rs-skeleton rs-skeleton--thumb"></div>
+            <div style="flex:1;display:flex;flex-direction:column;gap:var(--rs-space-2);">
+              <div class="rs-skeleton rs-skeleton--title" style="width:55%;"></div>
+              <div class="rs-skeleton rs-skeleton--text" style="width:80%;"></div>
+              <div class="rs-skeleton rs-skeleton--text" style="width:30%;"></div>
+            </div>
+            <div class="rs-skeleton" style="width:52px;height:60px;border-radius:var(--rs-radius);"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           MOCKUP: FULL FEED PAGE
+           ======================================== -->
+      <section class="ds-section" id="mockup-feed">
+        <h2 class="ds-section__title">Page Mockup: Feed</h2>
+        <p class="ds-section__desc">Full page layout with header, category sidebar, and content feed.</p>
+
+        <!-- Header -->
+        <div class="rs-header ds-mockup-header" style="border:1px solid var(--rs-color-border);">
+          <div class="rs-header__inner">
+            <div class="rs-header__left">
+              <a href="#" class="rs-header__logo"><div class="rs-header__logo-icon"><i data-lucide="zap" style="width:18px;height:18px;color:white;"></i></div>Roar</a>
+              <nav class="rs-header__nav">
+                <a href="#" class="rs-header__nav-link rs-header__nav-link--active">Feed</a>
+                <a href="#" class="rs-header__nav-link">Leaderboard</a>
+                <a href="#" class="rs-header__nav-link">Courses</a>
+              </nav>
+            </div>
+            <div class="rs-header__right">
+              <div class="rs-search"><i data-lucide="search" class="rs-search__icon"></i><input type="text" class="rs-search__input" placeholder="Search..."><kbd class="rs-search__kbd">/</kbd></div>
+              <button class="rs-btn rs-btn--sm rs-btn--primary"><i data-lucide="plus" style="width:14px;height:14px;"></i> New Post</button>
+              <div class="rs-avatar rs-avatar--sm" style="background:linear-gradient(135deg,#2d4cb5,#3563e9);color:white;font-size:11px;">AK</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Body -->
+        <div class="ds-mockup-body">
+          <!-- Sidebar -->
+          <div class="rs-sidebar" style="width:200px;">
+            <div class="rs-sidebar__section">
+              <div class="rs-sidebar__title">Feed</div>
+              <a href="#" class="rs-sidebar__link rs-sidebar__link--active"><i data-lucide="trending-up" class="rs-sidebar__link-icon"></i> Trending</a>
+              <a href="#" class="rs-sidebar__link"><i data-lucide="clock" class="rs-sidebar__link-icon"></i> Recent</a>
+              <a href="#" class="rs-sidebar__link"><i data-lucide="flame" class="rs-sidebar__link-icon"></i> Hot</a>
+            </div>
+            <div class="rs-sidebar__section">
+              <div class="rs-sidebar__title">Categories</div>
+              <a href="#" class="rs-sidebar__link"><span style="width:8px;height:8px;border-radius:50%;background:var(--rs-color-cat-1);flex-shrink:0;"></span> AI Projects <span class="rs-sidebar__link-count">24</span></a>
+              <a href="#" class="rs-sidebar__link"><span style="width:8px;height:8px;border-radius:50%;background:var(--rs-color-cat-2);flex-shrink:0;"></span> Tutorials <span class="rs-sidebar__link-count">18</span></a>
+              <a href="#" class="rs-sidebar__link"><span style="width:8px;height:8px;border-radius:50%;background:var(--rs-color-cat-3);flex-shrink:0;"></span> Tools <span class="rs-sidebar__link-count">12</span></a>
+              <a href="#" class="rs-sidebar__link"><span style="width:8px;height:8px;border-radius:50%;background:var(--rs-color-cat-4);flex-shrink:0;"></span> Prompts <span class="rs-sidebar__link-count">9</span></a>
+            </div>
+          </div>
+
+          <!-- Feed -->
+          <div style="flex:1;">
+            <div class="rs-feed">
+              <div class="rs-feed__date-header">Today</div>
+              <div class="rs-post-card">
+                <div class="rs-post-card__thumb" style="background:linear-gradient(135deg,#2d4cb5,#3563e9);color:white;"><i data-lucide="bot" style="width:28px;height:28px;"></i></div>
+                <div class="rs-post-card__content">
+                  <div class="rs-post-card__title">AI-Powered Code Review Bot</div>
+                  <div class="rs-post-card__desc">Built a custom code review bot that analyzes PRs and suggests improvements.</div>
+                  <div class="rs-post-card__meta" style="margin-top:var(--rs-space-2);"><span class="rs-post-card__meta-item"><div class="rs-avatar rs-avatar--xs" style="background:#3563e9;color:white;font-size:8px;">SK</div>Sarah K.</span><span class="rs-post-card__meta-item"><i data-lucide="message-circle" style="width:13px;height:13px;"></i> 12</span></div>
+                </div>
+                <button class="rs-upvote" data-upvote><svg class="rs-upvote__icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg><span class="rs-upvote__count">47</span></button>
+              </div>
+              <div class="rs-post-card">
+                <div class="rs-post-card__thumb" style="background:linear-gradient(135deg,#3a4560,#55607a);color:white;"><i data-lucide="wrench" style="width:28px;height:28px;"></i></div>
+                <div class="rs-post-card__content">
+                  <div class="rs-post-card__title">Cursor AI Tips & Tricks</div>
+                  <div class="rs-post-card__desc">Curated list of productivity shortcuts for Cursor IDE.</div>
+                  <div class="rs-post-card__meta" style="margin-top:var(--rs-space-2);"><span class="rs-post-card__meta-item"><div class="rs-avatar rs-avatar--xs" style="background:#55607a;color:white;font-size:8px;">RL</div>Ryan L.</span><span class="rs-post-card__meta-item"><i data-lucide="message-circle" style="width:13px;height:13px;"></i> 15</span></div>
+                </div>
+                <button class="rs-upvote rs-upvote--active" data-upvote><svg class="rs-upvote__icon" viewBox="0 0 24 24" fill="currentColor" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="m18 15-6-6-6 6"/></svg><span class="rs-upvote__count">38</span></button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ========================================
+           MOCKUP: LEADERBOARD PAGE
+           ======================================== -->
+      <section class="ds-section" id="mockup-leaderboard">
+        <h2 class="ds-section__title">Page Mockup: Leaderboard</h2>
+
+        <div class="ds-grid-4" style="margin-bottom:var(--rs-space-6);">
+          <div class="rs-stat-card">
+            <div class="rs-stat-card__icon" style="background:var(--rs-color-primary-subdued);color:var(--rs-color-primary);"><i data-lucide="trophy" style="width:20px;height:20px;"></i></div>
+            <div class="rs-stat-card__value">48</div>
+            <div class="rs-stat-card__label">Active Members</div>
+          </div>
+          <div class="rs-stat-card">
+            <div class="rs-stat-card__icon" style="background:var(--rs-color-info-light);color:var(--rs-color-info);"><i data-lucide="file-text" style="width:20px;height:20px;"></i></div>
+            <div class="rs-stat-card__value">142</div>
+            <div class="rs-stat-card__label">Posts Shared</div>
+          </div>
+          <div class="rs-stat-card">
+            <div class="rs-stat-card__icon" style="background:var(--rs-color-success-light);color:var(--rs-color-success);"><i data-lucide="chevron-up" style="width:20px;height:20px;"></i></div>
+            <div class="rs-stat-card__value">2,847</div>
+            <div class="rs-stat-card__label">Upvotes</div>
+          </div>
+          <div class="rs-stat-card">
+            <div class="rs-stat-card__icon" style="background:var(--rs-color-warning-light);color:var(--rs-color-warning);"><i data-lucide="flame" style="width:20px;height:20px;"></i></div>
+            <div class="rs-stat-card__value">14</div>
+            <div class="rs-stat-card__label">Top Streak</div>
+          </div>
+        </div>
+
+        <div style="display:flex;gap:var(--rs-space-3);margin-bottom:var(--rs-space-4);">
+          <button class="rs-btn rs-btn--sm rs-btn--primary">This Week</button>
+          <button class="rs-btn rs-btn--sm rs-btn--secondary">This Month</button>
+          <button class="rs-btn rs-btn--sm rs-btn--secondary">All Time</button>
+        </div>
+
+        <div style="border:1px solid var(--rs-color-border);border-radius:var(--rs-radius-lg);overflow:hidden;background:var(--rs-color-surface);box-shadow:var(--rs-shadow-sm);">
+          <div class="rs-leaderboard-row">
+            <div class="rs-leaderboard-row__rank rs-leaderboard-row__rank--1">1</div>
+            <div class="rs-leaderboard-row__user"><div class="rs-avatar rs-avatar--md" style="background:linear-gradient(135deg,var(--rs-color-avatar-neutral-a),var(--rs-color-avatar-neutral-b));color:var(--rs-color-content-on-primary);">SK</div><div><div class="rs-leaderboard-row__name">Sarah Kim</div><div class="rs-leaderboard-row__dept">Engineering</div></div></div>
+            <div class="rs-leaderboard-row__stats"><div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">1,240</div><div class="rs-leaderboard-row__stat-label">Points</div></div><div class="rs-leaderboard-row__stat"><div class="rs-streak rs-streak--active"><span class="rs-streak__icon">&#128293;</span> 14d</div></div><div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">8</div><div class="rs-leaderboard-row__stat-label">Badges</div></div></div>
+          </div>
+          <div class="rs-leaderboard-row">
+            <div class="rs-leaderboard-row__rank rs-leaderboard-row__rank--2">2</div>
+            <div class="rs-leaderboard-row__user"><div class="rs-avatar rs-avatar--md" style="background:linear-gradient(135deg,var(--rs-color-primary-pressed),var(--rs-color-primary));color:var(--rs-color-content-on-primary);">MJ</div><div><div class="rs-leaderboard-row__name">Mike Johnson</div><div class="rs-leaderboard-row__dept">Data Science</div></div></div>
+            <div class="rs-leaderboard-row__stats"><div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">980</div><div class="rs-leaderboard-row__stat-label">Points</div></div><div class="rs-leaderboard-row__stat"><div class="rs-streak"><span class="rs-streak__icon">&#128293;</span> 7d</div></div><div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">6</div><div class="rs-leaderboard-row__stat-label">Badges</div></div></div>
+          </div>
+          <div class="rs-leaderboard-row">
+            <div class="rs-leaderboard-row__rank rs-leaderboard-row__rank--3">3</div>
+            <div class="rs-leaderboard-row__user"><div class="rs-avatar rs-avatar--md" style="background:linear-gradient(135deg,var(--rs-color-avatar-muted-a),var(--rs-color-avatar-muted-b));color:var(--rs-color-content-on-primary);">RL</div><div><div class="rs-leaderboard-row__name">Ryan Lee</div><div class="rs-leaderboard-row__dept">Product</div></div></div>
+            <div class="rs-leaderboard-row__stats"><div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">870</div><div class="rs-leaderboard-row__stat-label">Points</div></div><div class="rs-leaderboard-row__stat"><div class="rs-streak"><span class="rs-streak__icon">&#128293;</span> 3d</div></div><div class="rs-leaderboard-row__stat"><div class="rs-leaderboard-row__stat-value">5</div><div class="rs-leaderboard-row__stat-label">Badges</div></div></div>
+          </div>
+        </div>
+      </section>
+
+    </main>
+  </div>
+
+  <!-- Modals live outside .ds-layout so position:fixed overlays are not clipped by scroll/motion ancestors -->
+  <div class="rs-modal-overlay" id="demo-modal" hidden>
+    <div class="rs-modal rs-modal--md" role="dialog" aria-modal="true" aria-labelledby="demo-modal-title">
+      <div class="rs-modal__header">
+        <h3 class="rs-modal__title" id="demo-modal-title">Submit New Post</h3>
+        <button type="button" class="rs-modal__close" data-close-modal aria-label="Close dialog"><i data-lucide="x" style="width:20px;height:20px;"></i></button>
+      </div>
+      <div class="rs-modal__body">
+        <div class="rs-field" style="margin-bottom:var(--rs-space-4);">
+          <label class="rs-label">Title</label>
+          <input type="text" class="rs-input" placeholder="Give your post a title...">
+        </div>
+        <div class="rs-field">
+          <label class="rs-label">URL</label>
+          <input type="text" class="rs-input" placeholder="https://...">
+          <span class="rs-field-msg rs-field-msg--helper">Loom, GitHub, or any link to your work</span>
+        </div>
+      </div>
+      <div class="rs-modal__footer">
+        <button type="button" class="rs-btn rs-btn--md rs-btn--secondary" data-close-modal>Cancel</button>
+        <button type="button" class="rs-btn rs-btn--md rs-btn--primary">Submit Post</button>
+      </div>
+    </div>
+  </div>
+
+  <div class="rs-modal-overlay" id="settings-modal" hidden>
+    <div class="rs-modal rs-modal--settings" role="dialog" aria-modal="true" aria-labelledby="index-settings-nav-title">
+      <div class="rs-settings-layout">
+        <aside class="rs-settings-nav" aria-label="Settings sections">
+          <h2 class="rs-settings-nav__title" id="index-settings-nav-title">Settings</h2>
+          <nav class="rs-settings-nav__list" role="tablist" aria-label="Workspace settings">
+            <button type="button" class="rs-settings-nav__tab is-active" role="tab" aria-selected="true" aria-controls="index-prefs-general" id="index-prefs-tab-general" data-index-prefs-panel="general" data-panel-title="General">
+              <i data-lucide="sliders-horizontal" aria-hidden="true"></i>
+              General
+            </button>
+            <button type="button" class="rs-settings-nav__tab" role="tab" aria-selected="false" aria-controls="index-prefs-workspace" id="index-prefs-tab-workspace" data-index-prefs-panel="workspace" data-panel-title="Workspace">
+              <i data-lucide="folder" aria-hidden="true"></i>
+              Workspace
+            </button>
+            <button type="button" class="rs-settings-nav__tab" role="tab" aria-selected="false" aria-controls="index-prefs-appearance" id="index-prefs-tab-appearance" data-index-prefs-panel="appearance" data-panel-title="Appearance">
+              <i data-lucide="palette" aria-hidden="true"></i>
+              Appearance
+            </button>
+          </nav>
+        </aside>
+        <div class="rs-settings-body">
+          <div class="rs-settings-body__toolbar">
+            <h3 class="rs-settings-body__title" id="index-prefs-panel-title">General</h3>
+            <button type="button" class="rs-modal__close" data-close-modal aria-label="Close settings"><i data-lucide="x" style="width:20px;height:20px;"></i></button>
+          </div>
+          <div class="rs-settings-body__scroll">
+            <div class="rs-settings-panel" id="index-prefs-general" role="tabpanel" aria-labelledby="index-prefs-tab-general">
+              <div class="rs-settings-section">
+                <div class="rs-settings-section__kicker">Basics</div>
+                <p class="rs-settings-hint">Example configuration surface — wire to your app state or API.</p>
+                <div class="rs-settings-rows">
+                  <div class="rs-settings-row">
+                    <div class="rs-settings-row__text">
+                      <div class="rs-settings-row__label">Display name</div>
+                      <div class="rs-settings-row__desc">How other workspace members see you.</div>
+                    </div>
+                    <div class="rs-settings-row__control">
+                      <input type="text" class="rs-input" value="Alish Mutaliyev" autocomplete="name" id="index-prefs-display-name">
+                    </div>
+                  </div>
+                  <div class="rs-settings-row">
+                    <div class="rs-settings-row__text">
+                      <div class="rs-settings-row__label">Language</div>
+                      <div class="rs-settings-row__desc">Interface copy and formats.</div>
+                    </div>
+                    <div class="rs-settings-row__control">
+                      <label class="rs-sr-only" for="index-prefs-lang">Language</label>
+                      <select id="index-prefs-lang" class="rs-input">
+                        <option value="en" selected>English (US)</option>
+                        <option value="en-gb">English (UK)</option>
+                        <option value="es">Español</option>
+                      </select>
+                    </div>
+                  </div>
+                  <div class="rs-settings-row">
+                    <div class="rs-settings-row__text">
+                      <div class="rs-settings-row__label">Show layout hints</div>
+                      <div class="rs-settings-row__desc">Extra helper text in demos and empty states.</div>
+                    </div>
+                    <div class="rs-settings-row__control">
+                      <label class="rs-switch">
+                        <input type="checkbox" id="index-prefs-hints" checked>
+                        <span class="rs-switch__track" aria-hidden="true"></span>
+                        <span class="rs-sr-only">Show layout hints</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="rs-settings-panel" id="index-prefs-workspace" role="tabpanel" aria-labelledby="index-prefs-tab-workspace" hidden>
+              <div class="rs-settings-section">
+                <div class="rs-settings-section__kicker">Email</div>
+                <div class="rs-settings-rows">
+                  <div class="rs-settings-row">
+                    <div class="rs-settings-row__text">
+                      <div class="rs-settings-row__label">Weekly activity summary</div>
+                      <div class="rs-settings-row__desc">Digest of posts, votes, and streaks.</div>
+                    </div>
+                    <div class="rs-settings-row__control">
+                      <label class="rs-switch">
+                        <input type="checkbox" id="index-prefs-digest-weekly" checked>
+                        <span class="rs-switch__track" aria-hidden="true"></span>
+                        <span class="rs-sr-only">Weekly activity summary</span>
+                      </label>
+                    </div>
+                  </div>
+                  <div class="rs-settings-row">
+                    <div class="rs-settings-row__text">
+                      <div class="rs-settings-row__label">Mention alerts</div>
+                      <div class="rs-settings-row__desc">Notify when someone @mentions you.</div>
+                    </div>
+                    <div class="rs-settings-row__control">
+                      <label class="rs-switch">
+                        <input type="checkbox" id="index-prefs-mentions">
+                        <span class="rs-switch__track" aria-hidden="true"></span>
+                        <span class="rs-sr-only">Mention alerts</span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="rs-settings-section">
+                <div class="rs-settings-section__kicker">Layout</div>
+                <div class="rs-settings-rows">
+                  <div class="rs-settings-row">
+                    <div class="rs-settings-row__text">
+                      <div class="rs-settings-row__label">Table density</div>
+                      <div class="rs-settings-row__desc">Tighter rows in leaderboard and lists.</div>
+                    </div>
+                    <div class="rs-settings-row__control">
+                      <label class="rs-sr-only" id="index-density-label" for="index-density-trigger">Table density</label>
+                      <div class="rs-dropdown" data-dropdown>
+                        <button
+                          type="button"
+                          class="rs-dropdown__trigger"
+                          id="index-density-trigger"
+                          aria-haspopup="listbox"
+                          aria-expanded="false"
+                          aria-labelledby="index-density-label"
+                          aria-controls="index-density-menu"
+                        >
+                          <span class="rs-dropdown__value" data-dropdown-value>Comfortable</span>
+                          <i data-lucide="chevron-down" class="rs-dropdown__chev" aria-hidden="true"></i>
+                        </button>
+                        <div class="rs-dropdown__menu" id="index-density-menu" role="listbox" hidden aria-labelledby="index-density-label">
+                          <button type="button" class="rs-dropdown__option" role="option" data-value="comfortable" aria-selected="true">Comfortable</button>
+                          <button type="button" class="rs-dropdown__option" role="option" data-value="compact" aria-selected="false">Compact</button>
+                          <button type="button" class="rs-dropdown__option" role="option" data-value="dense" aria-selected="false">Dense</button>
+                        </div>
+                        <input type="hidden" name="density" value="comfortable" data-dropdown-input>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="rs-settings-row">
+                    <div class="rs-settings-row__text">
+                      <div class="rs-settings-row__label">Default landing page</div>
+                      <div class="rs-settings-row__desc">Where this workspace opens after sign-in.</div>
+                    </div>
+                    <div class="rs-settings-row__control">
+                      <div style="display:flex;flex-direction:column;gap:var(--rs-space-2);align-items:flex-end;">
+                        <label class="rs-radio"><input type="radio" name="index-landing-demo" checked> Operations dashboard</label>
+                        <label class="rs-radio"><input type="radio" name="index-landing-demo"> Design system</label>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div class="rs-settings-panel" id="index-prefs-appearance" role="tabpanel" aria-labelledby="index-prefs-tab-appearance" hidden>
+              <div class="rs-settings-section">
+                <div class="rs-settings-section__kicker">Theme</div>
+                <p class="rs-settings-hint">Matches the header controls — change either place.</p>
+                <div class="rs-palette-picker" role="group" aria-labelledby="index-prefs-palette-label">
+                  <span id="index-prefs-palette-label" class="rs-palette-picker__label">Accent palette</span>
+                  <div class="rs-palette-picker__row">
+                    <button type="button" class="rs-palette-picker__option" data-set-palette="neutral" style="background:linear-gradient(135deg,#1c1d22 0%,#6b7280 100%);width:28px;height:28px;" title="Neutral" aria-label="Neutral accent"></button>
+                    <button type="button" class="rs-palette-picker__option" data-set-palette="slate" style="background:#3563e9;width:28px;height:28px;" title="Slate" aria-label="Slate accent"></button>
+                    <button type="button" class="rs-palette-picker__option" data-set-palette="teal" style="background:#0d9488;width:28px;height:28px;" title="Teal" aria-label="Teal accent"></button>
+                    <button type="button" class="rs-palette-picker__option" data-set-palette="violet" style="background:#7c3aed;width:28px;height:28px;" title="Violet" aria-label="Violet accent"></button>
+                    <button type="button" class="rs-palette-picker__option" data-set-palette="amber" style="background:#d97706;width:28px;height:28px;" title="Amber" aria-label="Amber accent"></button>
+                    <button type="button" class="rs-palette-picker__option" data-set-palette="rose" style="background:#e11d48;width:28px;height:28px;" title="Rose" aria-label="Rose accent"></button>
+                  </div>
+                </div>
+                <div class="rs-palette-picker" role="group" aria-labelledby="index-prefs-theme-label" style="margin-top:var(--rs-space-4);">
+                  <span id="index-prefs-theme-label" class="rs-palette-picker__label">Mode</span>
+                  <div class="rs-theme-toggle" role="group" aria-label="Color theme">
+                    <button class="rs-theme-toggle__button" type="button" data-set-theme="dark" aria-pressed="false">
+                      <i data-lucide="moon-star"></i>
+                      Dark
+                    </button>
+                    <button class="rs-theme-toggle__button" type="button" data-set-theme="light" aria-pressed="false">
+                      <i data-lucide="sun-medium"></i>
+                      Light
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="rs-settings-body__footer">
+            <button type="button" class="rs-btn rs-btn--md rs-btn--secondary" data-close-modal>Cancel</button>
+            <button type="button" class="rs-btn rs-btn--md rs-btn--primary" data-close-modal>Save changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ============================================================
+       JAVASCRIPT
+       ============================================================ -->
+  <script src="theme-palette.js"></script>
+  <script src="ds-motion.js"></script>
+  <script src="rs-picker.js"></script>
+  <script>
+    const applyTheme = (theme) => {
+      document.documentElement.setAttribute('data-theme', theme);
+      document.querySelectorAll('[data-set-theme]').forEach((button) => {
+        button.setAttribute('aria-pressed', String(button.dataset.setTheme === theme));
+      });
+    };
+
+    const getSavedTheme = () => {
+      try {
+        return localStorage.getItem('rs-theme') || document.documentElement.getAttribute('data-theme') || 'light';
+      } catch (error) {
+        console.warn('Theme preference could not be read.', error);
+        return document.documentElement.getAttribute('data-theme') || 'light';
+      }
+    };
+
+    applyTheme(getSavedTheme());
+
+    document.addEventListener('click', (e) => {
+      const themeBtn = e.target.closest('[data-set-theme]');
+      if (!themeBtn) return;
+      const theme = themeBtn.dataset.setTheme || 'light';
+      applyTheme(theme);
+      try {
+        localStorage.setItem('rs-theme', theme);
+      } catch (error) {
+        console.warn('Theme preference could not be saved.', error);
+      }
+    });
+
+    const syncPaletteUi = () => window.rsPalette?.syncButtons(document);
+    document.addEventListener('click', (e) => {
+      const pal = e.target.closest('[data-set-palette]');
+      if (!pal) return;
+      window.rsPalette?.apply(pal.dataset.setPalette);
+      syncPaletteUi();
+      lucide.createIcons();
+    });
+    syncPaletteUi();
+
+    // Initialize Lucide icons
+    lucide.createIcons();
+
+    if (typeof window.rsInitPickers === 'function') {
+      window.rsInitPickers();
+    }
+
+    const initRangeDuals = () => {
+      document.querySelectorAll('[data-range-dual]').forEach((root) => {
+        const fill = root.querySelector('.rs-range-dual__fill');
+        const lower = root.querySelector('.rs-range-dual__input--lower');
+        const upper = root.querySelector('.rs-range-dual__input--upper');
+        const out = document.getElementById('demo-range-dual-out');
+        if (!fill || !lower || !upper) return;
+        const update = () => {
+          const lo = Number(lower.value);
+          const hi = Number(upper.value);
+          const min = Number(lower.min);
+          const max = Number(lower.max);
+          const span = max - min || 1;
+          const a = Math.min(lo, hi);
+          const b = Math.max(lo, hi);
+          const p1 = ((a - min) / span) * 100;
+          const p2 = ((b - min) / span) * 100;
+          fill.style.left = `${p1}%`;
+          fill.style.width = `${Math.max(p2 - p1, 0)}%`;
+          if (out) out.textContent = `${a} – ${b}`;
+        };
+        lower.addEventListener('input', update);
+        upper.addEventListener('input', update);
+        update();
+      });
+    };
+    initRangeDuals();
+
+    const demoRangeSingle = document.getElementById('demo-range-single');
+    const demoRangeSingleOut = document.getElementById('demo-range-single-out');
+    demoRangeSingle?.addEventListener('input', () => {
+      const v = demoRangeSingle.value;
+      if (demoRangeSingleOut) demoRangeSingleOut.textContent = v;
+      demoRangeSingle.setAttribute('aria-valuenow', v);
+    });
+
+    document.querySelectorAll('[data-table-actions]').forEach((root, i) => {
+      if (!root.id) root.id = `rs-table-actions-${i + 1}`;
+    });
+
+    // ---- Upvote Toggle ----
+    document.addEventListener('click', (e) => {
+      const btn = e.target.closest('[data-upvote]');
+      if (!btn) return;
+
+      const countEl = btn.querySelector('.rs-upvote__count');
+      const svgEl = btn.querySelector('.rs-upvote__icon');
+      let count = parseInt(countEl.textContent);
+
+      if (btn.classList.contains('rs-upvote--active')) {
+        btn.classList.remove('rs-upvote--active');
+        svgEl.setAttribute('fill', 'none');
+        countEl.textContent = count - 1;
+      } else {
+        btn.classList.add('rs-upvote--active');
+        svgEl.setAttribute('fill', 'currentColor');
+        countEl.textContent = count + 1;
+        // Bounce animation
+        svgEl.style.transform = 'translateY(-4px) scale(1.3)';
+        setTimeout(() => { svgEl.style.transform = ''; }, 200);
+      }
+    });
+
+    // ---- Custom dropdowns ----
+    const closeDropdown = (root) => {
+      if (!root) return;
+      root.classList.remove('is-open');
+      const trigger = root.querySelector('.rs-dropdown__trigger');
+      const menu = root.querySelector('.rs-dropdown__menu');
+      if (trigger) trigger.setAttribute('aria-expanded', 'false');
+      if (menu) menu.hidden = true;
+    };
+
+    const openDropdown = (root) => {
+      document.querySelectorAll('.rs-dropdown.is-open').forEach((d) => {
+        if (d !== root) closeDropdown(d);
+      });
+      root.classList.add('is-open');
+      const trigger = root.querySelector('.rs-dropdown__trigger');
+      const menu = root.querySelector('.rs-dropdown__menu');
+      if (trigger) trigger.setAttribute('aria-expanded', 'true');
+      if (menu) menu.hidden = false;
+    };
+
+    const updateMultiselect = (root) => {
+      if (!root || !root.classList.contains('rs-dropdown--multiple')) return;
+      const summary = root.querySelector('[data-multiselect-summary]');
+      const hidden = root.querySelector('[data-multiselect-hidden]');
+      const boxes = root.querySelectorAll('.rs-multiselect__row input[type="checkbox"]');
+      const selected = Array.from(boxes).filter((c) => c.checked);
+      const labels = selected.map((c) => {
+        const lab = c.closest('label');
+        if (!lab) return c.value;
+        const clone = lab.cloneNode(true);
+        clone.querySelector('input')?.remove();
+        return clone.textContent.replace(/\s+/g, ' ').trim();
+      });
+      const placeholder = summary?.dataset.placeholder || 'Select…';
+      if (summary) {
+        if (selected.length === 0) {
+          summary.textContent = placeholder;
+          summary.classList.add('is-placeholder');
+        } else if (selected.length <= 2) {
+          summary.textContent = labels.join(', ');
+          summary.classList.remove('is-placeholder');
+        } else {
+          summary.textContent = `${selected.length} selected`;
+          summary.classList.remove('is-placeholder');
+        }
+      }
+      if (hidden) hidden.value = selected.map((c) => c.value).join(',');
+    };
+
+    document.querySelectorAll('.rs-dropdown--multiple').forEach(updateMultiselect);
+
+    document.addEventListener('change', (e) => {
+      const t = e.target;
+      if (!(t instanceof HTMLInputElement) || t.type !== 'checkbox') return;
+      if (!t.closest('.rs-dropdown--multiple')) return;
+      const root = t.closest('.rs-dropdown--multiple');
+      updateMultiselect(root);
+    });
+
+    const getTableActionsMenu = (root) =>
+      root.querySelector('.rs-table-actions__menu') ||
+      (root.id && document.querySelector(`.rs-table-actions__menu[data-owner-root-id="${root.id}"]`));
+
+    const prefersReducedTableMenuMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const cancelPendingTableMenuClose = (menu) => {
+      if (!menu) return;
+      if (menu._tableMenuCloseTimer) {
+        window.clearTimeout(menu._tableMenuCloseTimer);
+        menu._tableMenuCloseTimer = 0;
+      }
+      if (menu._tableMenuOnTransitionEnd) {
+        menu.removeEventListener('transitionend', menu._tableMenuOnTransitionEnd);
+        delete menu._tableMenuOnTransitionEnd;
+      }
+    };
+
+    const finalizeTableMenuClose = (root, menu) => {
+      if (!menu) return;
+      cancelPendingTableMenuClose(menu);
+      menu.classList.remove('rs-table-actions__menu--shown');
+      menu.hidden = true;
+      menu.style.left = '';
+      menu.style.top = '';
+      menu.style.right = '';
+      menu.style.maxWidth = '';
+      menu.style.width = '';
+      delete menu.dataset.ownerRootId;
+      if (menu.parentElement === document.body && root) {
+        root.appendChild(menu);
+      }
+    };
+
+    const closeAllTableMenus = (immediate = false) => {
+      document.querySelectorAll('.rs-table-actions.is-open').forEach((root) => {
+        root.classList.remove('is-open');
+        const tr = root.querySelector('.rs-table-actions__trigger');
+        const menu = getTableActionsMenu(root);
+        if (tr) tr.setAttribute('aria-expanded', 'false');
+        if (!menu) return;
+
+        const run = () => finalizeTableMenuClose(root, menu);
+
+        if (
+          immediate ||
+          prefersReducedTableMenuMotion.matches ||
+          !menu.classList.contains('rs-table-actions__menu--shown')
+        ) {
+          run();
+          return;
+        }
+
+        menu.classList.remove('rs-table-actions__menu--shown');
+        let done = false;
+        const finish = () => {
+          if (done) return;
+          done = true;
+          cancelPendingTableMenuClose(menu);
+          run();
+        };
+        menu._tableMenuOnTransitionEnd = (e) => {
+          if (e.target !== menu) return;
+          finish();
+        };
+        menu.addEventListener('transitionend', menu._tableMenuOnTransitionEnd);
+        menu._tableMenuCloseTimer = window.setTimeout(finish, 240);
+      });
+    };
+
+    const positionTableMenu = (root) => {
+      const trigger = root.querySelector('.rs-table-actions__trigger');
+      const menu = getTableActionsMenu(root);
+      if (!trigger || !menu || !root.id) return;
+      cancelPendingTableMenuClose(menu);
+      if (menu.parentElement !== document.body) {
+        document.body.appendChild(menu);
+      }
+      menu.dataset.ownerRootId = root.id;
+      menu.hidden = false;
+      if (prefersReducedTableMenuMotion.matches) {
+        menu.classList.add('rs-table-actions__menu--shown');
+      } else {
+        menu.classList.remove('rs-table-actions__menu--shown');
+      }
+      const place = () => {
+        const rect = trigger.getBoundingClientRect();
+        const br = menu.getBoundingClientRect();
+        const mw = Math.max(br.width, menu.offsetWidth, 192);
+        const mh = Math.max(br.height, menu.offsetHeight, 1);
+        let left = rect.right - mw;
+        left = Math.min(Math.max(8, left), window.innerWidth - mw - 8);
+        let top = rect.bottom + 6;
+        if (top + mh > window.innerHeight - 8 && rect.top > mh + 8) {
+          top = rect.top - mh - 6;
+        }
+        menu.style.left = `${Math.round(left)}px`;
+        menu.style.right = 'auto';
+        menu.style.top = `${Math.round(top)}px`;
+        if (mw > window.innerWidth - 16) {
+          menu.style.left = '8px';
+          menu.style.width = 'min(calc(100vw - 16px), 280px)';
+          menu.style.maxWidth = 'min(calc(100vw - 16px), 280px)';
+        } else {
+          menu.style.maxWidth = '';
+          menu.style.width = '';
+        }
+      };
+      place();
+      if (prefersReducedTableMenuMotion.matches) {
+        requestAnimationFrame(() => {
+          place();
+          requestAnimationFrame(place);
+        });
+      } else {
+        requestAnimationFrame(() => {
+          place();
+          requestAnimationFrame(() => {
+            place();
+            menu.classList.add('rs-table-actions__menu--shown');
+            requestAnimationFrame(place);
+          });
+        });
+      }
+    };
+
+    document.addEventListener('click', (e) => {
+      const tableTrigger = e.target.closest('.rs-table-actions__trigger');
+      if (tableTrigger) {
+        e.preventDefault();
+        e.stopPropagation();
+        const root = tableTrigger.closest('[data-table-actions]');
+        if (!root) return;
+        const wasOpen = root.classList.contains('is-open');
+        closeAllTableMenus();
+        if (!wasOpen) {
+          root.classList.add('is-open');
+          tableTrigger.setAttribute('aria-expanded', 'true');
+          positionTableMenu(root);
+          tableTrigger.focus({ preventScroll: true });
+        }
+        return;
+      }
+
+      const tableItem = e.target.closest('.rs-table-actions__item');
+      if (tableItem) {
+        e.stopPropagation();
+        closeAllTableMenus();
+        return;
+      }
+
+      const trigger = e.target.closest('.rs-dropdown__trigger');
+      if (trigger) {
+        closeAllTableMenus();
+        const root = trigger.closest('.rs-dropdown');
+        if (root) {
+          if (root.classList.contains('is-open')) closeDropdown(root);
+          else openDropdown(root);
+        }
+        return;
+      }
+
+      const opt = e.target.closest('.rs-dropdown__option');
+      if (opt) {
+        closeAllTableMenus();
+        const root = opt.closest('.rs-dropdown');
+        if (!root || root.classList.contains('rs-dropdown--multiple')) return;
+        const menu = root.querySelector('.rs-dropdown__menu');
+        const valueEl = root.querySelector('[data-dropdown-value]');
+        const hidden = root.querySelector('[data-dropdown-input]');
+        menu.querySelectorAll('.rs-dropdown__option').forEach((b) => b.setAttribute('aria-selected', 'false'));
+        opt.setAttribute('aria-selected', 'true');
+        valueEl.textContent = opt.textContent.trim();
+        valueEl.classList.toggle('is-placeholder', opt.classList.contains('is-placeholder'));
+        if (hidden) hidden.value = opt.dataset.value ?? '';
+        closeDropdown(root);
+        return;
+      }
+
+      if (!e.target.closest('.rs-dropdown')) {
+        document.querySelectorAll('.rs-dropdown.is-open').forEach(closeDropdown);
+      }
+      if (!e.target.closest('[data-table-actions]') && !e.target.closest('.rs-table-actions__menu')) {
+        closeAllTableMenus();
+      }
+    });
+
+    window.addEventListener('resize', () => closeAllTableMenus(true));
+    window.addEventListener('scroll', () => closeAllTableMenus(true), true);
+
+    // ---- Feed mockup: block href="#" jump, toggle active states only inside the mock ----
+    const mockupFeed = document.getElementById('mockup-feed');
+    mockupFeed?.addEventListener('click', (e) => {
+      const a = e.target.closest('a[href="#"]');
+      if (!a || !mockupFeed.contains(a)) return;
+      e.preventDefault();
+      if (a.classList.contains('rs-sidebar__link')) {
+        mockupFeed.querySelectorAll('.ds-mockup-body .rs-sidebar__link').forEach((el) => {
+          el.classList.remove('rs-sidebar__link--active');
+        });
+        a.classList.add('rs-sidebar__link--active');
+        return;
+      }
+      if (a.classList.contains('rs-header__nav-link')) {
+        mockupFeed.querySelectorAll('.ds-mockup-header .rs-header__nav-link').forEach((el) => {
+          el.classList.remove('rs-header__nav-link--active');
+        });
+        a.classList.add('rs-header__nav-link--active');
+      }
+    });
+
+    // ---- Modals: open, close, overlay click, Escape ----
+    const resetIndexSettingsModal = () => {
+      const modal = document.getElementById('settings-modal');
+      if (!modal) return;
+      const tabs = modal.querySelectorAll('[data-index-prefs-panel]');
+      const panels = modal.querySelectorAll('.rs-settings-panel');
+      const titleEl = modal.querySelector('#index-prefs-panel-title');
+      tabs.forEach((t, i) => {
+        const on = i === 0;
+        t.classList.toggle('is-active', on);
+        t.setAttribute('aria-selected', String(on));
+        if (on && titleEl && t.dataset.panelTitle) titleEl.textContent = t.dataset.panelTitle;
+      });
+      panels.forEach((p) => {
+        const key = p.id.replace('index-prefs-', '');
+        p.hidden = key !== 'general';
+      });
+    };
+
+    document.addEventListener('click', (e) => {
+      const settingsTab = e.target.closest('#settings-modal [data-index-prefs-panel]');
+      if (settingsTab) {
+        const modal = document.getElementById('settings-modal');
+        const key = settingsTab.dataset.indexPrefsPanel;
+        if (!modal || !key) return;
+        const titleEl = modal.querySelector('#index-prefs-panel-title');
+        if (titleEl && settingsTab.dataset.panelTitle) titleEl.textContent = settingsTab.dataset.panelTitle;
+        modal.querySelectorAll('.rs-settings-nav__tab').forEach((t) => {
+          const on = t === settingsTab;
+          t.classList.toggle('is-active', on);
+          t.setAttribute('aria-selected', String(on));
+        });
+        modal.querySelectorAll('.rs-settings-panel').forEach((p) => {
+          p.hidden = p.id !== `index-prefs-${key}`;
+        });
+        lucide.createIcons();
+        return;
+      }
+
+      if (e.target.classList.contains('rs-modal-overlay')) {
+        e.target.hidden = true;
+      }
+      if (e.target.closest('#open-demo-modal')) {
+        closeAllTableMenus();
+        document.getElementById('demo-modal').hidden = false;
+        lucide.createIcons();
+      }
+      if (e.target.closest('#open-settings-modal')) {
+        closeAllTableMenus();
+        resetIndexSettingsModal();
+        document.getElementById('settings-modal').hidden = false;
+        lucide.createIcons();
+      }
+      const closeBtn = e.target.closest('[data-close-modal]');
+      if (closeBtn) {
+        const overlay = closeBtn.closest('.rs-modal-overlay');
+        if (overlay) overlay.hidden = true;
+      }
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        window.rsClosePickers?.();
+        closeAllTableMenus();
+        document.querySelectorAll('.rs-modal-overlay:not([hidden])').forEach((el) => {
+          el.hidden = true;
+        });
+        document.querySelectorAll('.rs-dropdown.is-open').forEach(closeDropdown);
+      }
+    });
+
+    // ---- Toast stack: dismiss with layout reflow + demo push ----
+    const prefersReducedMotionToast = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+    const dismissToast = (toast) => {
+      if (!toast || toast.classList.contains('rs-toast--leaving')) return;
+      toast.classList.add('rs-toast--leaving');
+      const ms = prefersReducedMotionToast.matches ? 120 : 400;
+      window.setTimeout(() => {
+        toast.remove();
+        if (typeof lucide !== 'undefined') lucide.createIcons();
+      }, ms);
+    };
+
+    document.addEventListener('click', (e) => {
+      const closeBtn = e.target.closest('.rs-toast__close');
+      if (!closeBtn) return;
+      e.preventDefault();
+      dismissToast(closeBtn.closest('.rs-toast'));
+    });
+
+    const demoToastStack = document.getElementById('demo-toast-stack');
+    const demoToastPush = document.getElementById('demo-toast-push');
+    let demoToastSerial = 0;
+    const demoToastTemplates = [
+      { variant: 'rs-toast--info', icon: 'bell', title: 'Reminder', message: 'Standup starts in 10 minutes.' },
+      { variant: 'rs-toast--success', icon: 'check-circle', title: 'Synced', message: 'Inventory snapshot saved to the warehouse feed.' },
+      { variant: 'rs-toast--warning', icon: 'alert-triangle', title: 'Rate limit', message: 'You are close to the API quota for this hour.' },
+    ];
+
+    const pushDemoToast = () => {
+      if (!demoToastStack) return;
+      const tpl = demoToastTemplates[demoToastSerial % demoToastTemplates.length];
+      demoToastSerial += 1;
+      const el = document.createElement('div');
+      el.className = `rs-toast ${tpl.variant}`;
+      el.innerHTML = `
+        <i data-lucide="${tpl.icon}" class="rs-toast__icon"></i>
+        <div class="rs-toast__content"><div class="rs-toast__title"></div><div class="rs-toast__message"></div></div>
+        <button type="button" class="rs-toast__close" aria-label="Dismiss notification"><i data-lucide="x" style="width:16px;height:16px;"></i></button>
+      `;
+      el.querySelector('.rs-toast__title').textContent = tpl.title;
+      el.querySelector('.rs-toast__message').textContent = tpl.message;
+      demoToastStack.appendChild(el);
+      if (typeof lucide !== 'undefined') lucide.createIcons();
+    };
+
+    demoToastPush?.addEventListener('click', pushDemoToast);
+
+    // ---- Sidebar scroll spy ----
+    const sidebarLinks = document.querySelectorAll('.ds-sidebar__link');
+    const sections = [];
+
+    sidebarLinks.forEach(link => {
+      const href = link.getAttribute('href');
+      if (href && href.startsWith('#')) {
+        const section = document.getElementById(href.slice(1));
+        if (section) sections.push({ el: section, link: link });
+      }
+    });
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          sidebarLinks.forEach(l => l.classList.remove('ds-sidebar__link--active'));
+          const match = sections.find(s => s.el === entry.target);
+          if (match) match.link.classList.add('ds-sidebar__link--active');
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s.el));
+  </script>
+</body>
+</html>
