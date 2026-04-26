@@ -16,10 +16,10 @@ React + TypeScript components for Roar Workspace. Visual reference: [`../../docs
    "@roar-workspace/ui": "file:../path/to/UI library/packages/ui"
    ```
 
-2. **Install peer dependencies** (same major lines as your app; adjust if you already have React / Tailwind):
+2. **Install React / Tailwind peers** (adjust if your app already has them):
 
    ```bash
-   npm install react react-dom tailwindcss @radix-ui/react-dialog sonner recharts
+   npm install react react-dom tailwindcss
    ```
 
 3. **Load tokens** in your app entry (e.g. `main.tsx`) and set theme on `<html>` (or `document.documentElement`):
@@ -84,7 +84,7 @@ For dialogs, charts, native date inputs, and the full API, see the sections belo
 
 ## AI assistants (bundled skill)
 
-This package ships a portable **agent skill** (markdown + YAML frontmatter) so coding agents know how to install peers, load tokens, configure Tailwind, and use the barrel API.
+This package ships a portable **agent skill** (markdown + YAML frontmatter) so coding agents know how to install the library, load tokens, configure Tailwind, and use the barrel API.
 
 | Where | Path |
 |--------|------|
@@ -145,11 +145,14 @@ Using `require.resolve('@roar-workspace/ui')` keeps the **`dist` glob** correct 
 
 - `react`, `react-dom`
 - `tailwindcss` **^3.4** — JIT must scan class strings in **`node_modules/@roar-workspace/ui/dist/**/*.js`**.
+
+## Bundled feature dependencies
+
 - **`@radix-ui/react-dialog`** — modal/dialog primitives (`Dialog`, `DialogContent`, …).
 - **`sonner`** — toasts; this package exports **`Toaster`** (themed) and re-exports **`toast`** from `sonner`.
 - **`recharts`** — charts; **`ChartShell`** + **`ThemedLineChart`** use tokens for grid, axes, and series color.
 
-Install peers alongside the UI package in your app.
+These are installed transitively with `@roar-workspace/ui` so root imports work for the full public API.
 
 ### Charts (v1)
 
