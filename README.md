@@ -1,6 +1,6 @@
 # Roar Workspace UI
 
-Monorepo for the **Roar** design reference (`docs/`) and the publishable React library **`@roar-workspace/ui`**. Components use **Tailwind CSS v3**, **CSS variables (`--rs-*`)**, and optional peers (**Radix Dialog**, **Sonner**, **Recharts**).
+Monorepo for the **Roar** design reference (`docs/`) and the publishable React library **`@roar-workspace/ui`**. Components use **Tailwind CSS v3**, **CSS variables (`--rs-*`)**, and bundled feature libraries (**Radix Dialog**, **Sonner**, **Recharts**).
 
 **Demo Preview:** [Design System](https://roar-ai-labs.github.io/roar_ui_library/) · [Dashboard](https://roar-ai-labs.github.io/roar_ui_library/dashboard.html) · [Charts](https://roar-ai-labs.github.io/roar_ui_library/charts.html)
 
@@ -95,7 +95,7 @@ npm run build:gallery
 
 ## Use the library in *another* project
 
-The **canonical install guide** is the **Quick start** in [**packages/ui/README.md**](packages/ui/README.md): `npm install`, peers, `import '@roar-workspace/ui/styles.css'`, Tailwind preset + `content` glob, and example `App` code.
+The **canonical install guide** is the **Quick start** in [**packages/ui/README.md**](packages/ui/README.md): `npm install`, React/Tailwind peers, `import '@roar-workspace/ui/styles.css'`, Tailwind preset + `content` glob, and example `App` code.
 
 **Local link (before npm publish):**
 
@@ -154,7 +154,7 @@ The `.tgz` should include among other paths: `package.json`, `README.md`, `dist/
 
 ## License
 
-Library **`license`** field in [packages/ui/package.json](packages/ui/package.json) is currently **`UNLICENSED`** — change when you adopt a real license and add a `LICENSE` file if needed.
+The library is released under the [MIT License](LICENSE).
 
 ---
 

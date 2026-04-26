@@ -2,7 +2,7 @@
 name: roar-workspace-ui
 description: >-
   Use when installing, configuring, or extending @roar-workspace/ui (Roar UI):
-  Tailwind preset, tokens stylesheet, peers, barrel exports, monorepo component
+  Tailwind preset, tokens stylesheet, React/Tailwind peers, barrel exports, monorepo component
   patterns, releases, or copying this skill from node_modules into an agent
   skills folder.
 ---
@@ -19,10 +19,10 @@ description: >-
 
 ## Consume the package (another repository)
 
-1. **Install** the library and **peers** (adjust versions to match the app):
+1. **Install** the library and React / Tailwind peers (adjust versions to match the app):
 
    ```bash
-   npm install @roar-workspace/ui react react-dom tailwindcss @radix-ui/react-dialog sonner recharts
+   npm install @roar-workspace/ui react react-dom tailwindcss
    ```
 
 2. **Styles:** in the app entry (e.g. `main.tsx`):
@@ -58,7 +58,7 @@ description: >-
 
    Do **not** deep-import from `@roar-workspace/ui/dist/...` or unpublished paths.
 
-6. **Dialogs / toasts / charts:** peers must be installed; mount **`Toaster`** once if using `toast()`.
+6. **Dialogs / toasts / charts:** Radix Dialog, Sonner, and Recharts install with the UI package; mount **`Toaster`** once if using `toast()`.
 
 Full human docs: `packages/ui/README.md` in this monorepo, or the same file inside **`node_modules/@roar-workspace/ui/README.md`** after install.
 
