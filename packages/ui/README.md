@@ -82,6 +82,27 @@ React + TypeScript components for Roar Workspace. Visual reference: [`../../docs
 
 For dialogs, charts, native date inputs, and the full API, see the sections below.
 
+## Import paths
+
+The root barrel remains the broadest API and is safe for existing consumers:
+
+```tsx
+import { Button, Card, Dialog, ThemedLineChart } from '@roar-workspace/ui';
+```
+
+For larger apps, use category subpaths to make intent clearer without deep-importing unpublished files:
+
+```tsx
+import { Field, Input, Select } from '@roar-workspace/ui/forms';
+import { Card, Badge, Avatar } from '@roar-workspace/ui/display';
+import { Header, SearchBar } from '@roar-workspace/ui/layout';
+import { PostCard, StatsCard } from '@roar-workspace/ui/product';
+import { Dialog, Toaster, toast } from '@roar-workspace/ui/overlays';
+import { ChartShell, ThemedLineChart } from '@roar-workspace/ui/charts';
+```
+
+Supported subpaths are `./forms`, `./display`, `./layout`, `./product`, `./overlays`, and `./charts`.
+
 ## AI assistants (bundled skill)
 
 This package ships a portable **agent skill** (markdown + YAML frontmatter) so coding agents know how to install the library, load tokens, configure Tailwind, and use the barrel API.
@@ -190,6 +211,9 @@ From the repo root, **`npm run dev:playground`** runs [`../playground`](../playg
 ```bash
 npm install
 npm run build
+npm run typecheck
+npm run test
+npm run test:smoke
 ```
 
 ## Consume locally (another app)

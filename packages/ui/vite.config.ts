@@ -13,10 +13,18 @@ export default defineConfig({
   ],
   build: {
     lib: {
-      entry: resolve(__dirname, 'src/index.ts'),
+      entry: {
+        index: resolve(__dirname, 'src/index.ts'),
+        forms: resolve(__dirname, 'src/forms.ts'),
+        display: resolve(__dirname, 'src/display.ts'),
+        layout: resolve(__dirname, 'src/layout.ts'),
+        product: resolve(__dirname, 'src/product.ts'),
+        overlays: resolve(__dirname, 'src/overlays.ts'),
+        charts: resolve(__dirname, 'src/charts.ts'),
+      },
       name: 'RoarWorkspaceUI',
       formats: ['es'],
-      fileName: 'index',
+      fileName: (_format, entryName) => `${entryName}.js`,
     },
     rollupOptions: {
       external: (id) =>

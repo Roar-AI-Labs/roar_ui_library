@@ -15,13 +15,13 @@
   ],
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/roar-workspace/ui-monorepo.git",
+    "url": "git+https://github.com/Roar-AI-Labs/roar_ui_library.git",
     "directory": "packages/ui"
   },
   "bugs": {
-    "url": "https://github.com/roar-workspace/ui-monorepo/issues"
+    "url": "https://github.com/Roar-AI-Labs/roar_ui_library/issues"
   },
-  "homepage": "https://www.npmjs.com/package/@roar-workspace/ui",
+  "homepage": "https://roar-ai-labs.github.io/roar_ui_library/",
   "type": "module",
   "files": [
     "dist",
@@ -38,6 +38,36 @@
       "import": "./dist/index.js",
       "require": "./dist/index.js"
     },
+    "./forms": {
+      "types": "./dist/forms.d.ts",
+      "import": "./dist/forms.js",
+      "require": "./dist/forms.js"
+    },
+    "./display": {
+      "types": "./dist/display.d.ts",
+      "import": "./dist/display.js",
+      "require": "./dist/display.js"
+    },
+    "./layout": {
+      "types": "./dist/layout.d.ts",
+      "import": "./dist/layout.js",
+      "require": "./dist/layout.js"
+    },
+    "./product": {
+      "types": "./dist/product.d.ts",
+      "import": "./dist/product.js",
+      "require": "./dist/product.js"
+    },
+    "./overlays": {
+      "types": "./dist/overlays.d.ts",
+      "import": "./dist/overlays.js",
+      "require": "./dist/overlays.js"
+    },
+    "./charts": {
+      "types": "./dist/charts.d.ts",
+      "import": "./dist/charts.js",
+      "require": "./dist/charts.js"
+    },
     "./styles.css": "./styles/roar-tokens.css",
     "./tailwind-preset": "./tailwind-preset.cjs",
     "./tailwind-preset.cjs": "./tailwind-preset.cjs"
@@ -49,6 +79,8 @@
   "scripts": {
     "build": "vite build",
     "dev": "vite build --watch",
+    "typecheck": "tsc -p tsconfig.json --noEmit",
+    "test": "vitest run --environment jsdom",
     "prepublishOnly": "npm run build"
   },
   "peerDependencies": {
@@ -65,16 +97,21 @@
     "tailwind-merge": "^2.6.0"
   },
   "devDependencies": {
+    "@testing-library/dom": "^10.4.1",
+    "@testing-library/jest-dom": "^6.6.3",
+    "@testing-library/react": "^16.2.0",
     "@types/react": "^18.3.12",
     "@types/react-dom": "^18.3.1",
     "@vitejs/plugin-react": "^4.3.4",
     "autoprefixer": "^10.4.20",
+    "jsdom": "^25.0.1",
     "postcss": "^8.4.49",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "tailwindcss": "^3.4.15",
     "typescript": "^5.7.2",
     "vite": "^6.0.3",
-    "vite-plugin-dts": "^4.3.0"
+    "vite-plugin-dts": "^4.3.0",
+    "vitest": "^2.1.8"
   }
 }

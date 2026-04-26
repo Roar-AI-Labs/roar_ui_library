@@ -9,10 +9,20 @@
     "build:playground": "npm run build -w @roar-workspace/playground",
     "build:gallery": "npm run build -w @roar-workspace/gallery",
     "build:docs": "npm run build -w @roar-workspace/ui && npm run build -w @roar-workspace/docs",
+    "typecheck": "npm run typecheck --workspaces --if-present",
+    "test": "npm run test -w @roar-workspace/ui",
+    "test:smoke": "node scripts/smoke-package.mjs",
+    "check": "npm run typecheck && npm run test && npm run test:smoke && npm run build && npm run build:docs && npm run build:gallery && npm run build:playground",
+    "changeset": "changeset",
+    "version-packages": "changeset version",
+    "release": "changeset publish",
     "dev:ui": "npm run dev -w @roar-workspace/ui",
     "dev:playground": "npm run dev -w @roar-workspace/playground",
     "dev:gallery": "npm run dev -w @roar-workspace/gallery",
     "dev:docs": "npm run build -w @roar-workspace/ui && npm run dev -w @roar-workspace/docs"
+  },
+  "devDependencies": {
+    "@changesets/cli": "^2.27.9"
   },
   "engines": {
     "node": ">=18"

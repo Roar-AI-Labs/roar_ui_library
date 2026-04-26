@@ -7,6 +7,8 @@ All notable changes to **`@roar-workspace/ui`** are documented here. The format 
 ### Added
 
 - **Bundled agent skill:** `skills/roar-workspace-ui/SKILL.md` ships with the npm package (`files` includes `skills`) for Cursor / Claude Code / Codex-style workflows; see root [README.md](README.md) and [packages/ui/README.md](packages/ui/README.md).
+- **Package subpath exports:** `@roar-workspace/ui/forms`, `/display`, `/layout`, `/product`, `/overlays`, and `/charts` provide supported category entrypoints in addition to the root barrel.
+- **Validation baseline:** root typecheck, Vitest component tests, package smoke test, and Changesets release tooling are available for maintainers.
 
 ## [0.5.1] — 2026-04-19
 

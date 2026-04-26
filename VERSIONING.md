@@ -17,10 +17,14 @@ Pre-1.0, treat **minor** releases as the place for larger additions and **patch*
 
 Release checklist:
 
-1. Update [CHANGELOG.md](CHANGELOG.md) under a dated section for the new version.
-2. Bump `"version"` in `packages/ui/package.json`.
-3. Set `ROAR_UI_VERSION` to the same value.
-4. `npm run build` from the repo root (and `npm pack -w @roar-workspace/ui` if you verify the tarball).
+1. Run `npm run check` from the repo root.
+2. Add a Changeset with `npm run changeset` for package changes that should ship to npm.
+3. Run `npm run version-packages` when preparing a release PR; this updates versions and changelogs from committed changesets.
+4. Confirm `ROAR_UI_VERSION` in [`packages/ui/src/index.ts`](packages/ui/src/index.ts) matches the npm version before publishing.
+5. Run `npm pack -w @roar-workspace/ui --dry-run` if you want to inspect the tarball.
+6. Publish with `npm run release` after the release commit is merged and npm credentials are configured.
+
+Manual changelog entries are still acceptable for local documentation-only changes, but package releases should prefer Changesets so version bumps and changelogs stay coordinated.
 
 ## Changelog
 
