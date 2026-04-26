@@ -7,3 +7,4 @@ dist/
 .env.*
 coverage/
 *.tgz
+docs/UI_LIBRARY_POLISH_PLAN.md

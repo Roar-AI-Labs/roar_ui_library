@@ -1,28 +1,32 @@
-# Roar Workspace — static design reference
+# Roar Workspace Docs
 
-These files are the **HTML/CSS/JS showcase** for the design system. They stay in sync with migration work in `packages/ui/` until React components reach parity.
+The public docs pages in this folder are static build outputs for GitHub Pages. Their source now lives in `packages/docs` and renders real components from `@roar-workspace/ui`.
 
 ## Pages
 
 | File | Contents |
 |------|----------|
-| `index.html` | Full component gallery (foundations + UI blocks + mockups). |
-| `dashboard.html` | Dashboard prototype with Chart.js panels. |
-| `charts.html` | Charts gallery and documentation. |
+| `index.html` | Component gallery rendered from the package. |
+| `dashboard.html` | Dashboard prototype rendered from the package. |
+| `charts.html` | Charts gallery rendered from the package. |
 
-## Local preview
+## Build And Preview
 
-Relative paths (`design-system.css`, `*.js`) assume all assets live in this folder.
+From the repository root:
 
-- **Quick:** double-click `index.html` or open it from your editor’s simple browser preview.
-- **Recommended:** serve the folder so scripts behave like a real site:
+```bash
+npm run build:docs
+npm run dev:docs
+```
+
+`npm run build:docs` writes the static HTML and assets into this folder.
+
+To preview the built static output without Vite:
 
 ```bash
 npx --yes serve docs
 ```
 
-Then open the URL shown in the terminal (usually `http://localhost:3000`).
-
 ## Related
 
-See the repo root **`ROADMAP.md`** for phased migration into the React package under `packages/ui/`.
+See the repo root `ROADMAP.md` and the local ignored plan at `docs/UI_LIBRARY_POLISH_PLAN.md`.

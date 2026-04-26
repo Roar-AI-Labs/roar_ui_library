@@ -1,0 +1,28 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  min-height: 100%;
+  background: var(--rs-color-bg);
+}
+
+body {
+  min-height: 100vh;
+  margin: 0;
+  background: var(--rs-color-bg);
+  color: var(--rs-color-content);
+  font-family: var(--rs-font-family), ui-sans-serif, system-ui, sans-serif;
+}
+
+#root {
+  min-height: 100vh;
+}
+
+a {
+  color: inherit;
+}
